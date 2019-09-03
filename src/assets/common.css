@@ -1,0 +1,7 @@
+body {
+  color: #333;
+}
+.el-upload-dragger {
+  width: 146px;
+  height: 146px;
+}
