@@ -1,14 +1,36 @@
 <template>
   <div class="about">
-    <div @drop="handleDrop" id="uploadBox" class="upload_box">
-      <div class="preview_wrapper">
-        <img :class="'preview'+previewList.length" class="preview" v-for="(preview,index) in previewList" :src="preview" :key="index" alt>
-      </div>
-      <input @change="changeFile" id="myFile" type="file" name="file" multiple>
+    <div class="main">
+      <div @drop="handleDrop" id="uploadBox" class="upload_box">
+        <div ref="previewWrapper" class="preview_wrapper">
+          <img
+            :class="'preview'+previewList.length"
+            class="preview"
+            v-for="(preview,index) in previewList"
+            :src="preview"
+            :key="index"
+            alt
+          >
+        </div>
+        <input @change="changeFile" id="myFile" type="file" name="file" multiple>
 
-      <div class="tips" @drop="handleDrop">
-        <i class="el-icon-plus"></i>
-        <div>点击选择文件或者将文件拖拽至此处</div>
+        <div class="tips" @drop="handleDrop">
+          <i class="el-icon-plus"></i>
+          <div>点击选择文件或者将文件拖拽至此处</div>
+        </div>
+      </div>
+      <div v-show="fullscreenShow" ref="fullscreenWrapper" class="fullscreen_list">
+        <img
+          :class="'preview'+previewList.length"
+          class="preview"
+          v-for="(preview,index) in previewList"
+          :src="preview"
+          :key="index"
+          alt
+        >
+      </div>
+      <div>
+        <el-button class="fullscreen_btn" type="primary" round @click="toFullScreen">全屏</el-button>
       </div>
     </div>
   </div>
@@ -20,20 +42,38 @@ export default {
       dialogImageUrl: "",
       dialogVisible: false,
       disabled: false,
-      previewList: []
+      fullscreenShow: true,
+      //previewList: []
+      previewList: [
+        "http://data.17jita.com/attachment/portal/201907/08/133548ke65tllllkzh8vjk.png",
+        "http://data.17jita.com/attachment/portal/201907/08/133549q88g800ob7bidg18.png",
+        "http://data.17jita.com/attachment/portal/201907/08/133550o6hq6xoxdilhdq69.png"
+      ]
     };
   },
-  mounted(){
-    document.querySelector('#myFile').addEventListener('dragover',(e)=>{
-      e.preventDefault()
-    })
-    document.querySelector('#myFile').addEventListener('drop',(e)=>{
-      e.preventDefault()
-    })
+  mounted() {
+    document.querySelector("#myFile").addEventListener("dragover", e => {
+      e.preventDefault();
+    });
+    document.querySelector("#myFile").addEventListener("drop", e => {
+      e.preventDefault();
+    });
+    this.fullscreenWrapper = this.$refs.fullscreenWrapper;
+    this.fullscreenWrapper.addEventListener("fullscreenchange", e => {
+      if (document.fullscreenElement) {
+        //进入全屏
+        this.fullscreenShow = true;
+      } else {
+        this.fullscreenShow = true;
+        //退出全屏
+      }
+    });
   },
   methods: {
-    changeFile(e){
-      console.log('zzz')
+    toFullScreen() {
+      this.fullscreenWrapper.requestFullscreen();
+    },
+    changeFile(e) {
       var fileList = e.target.files;
       Array.prototype.forEach.call(fileList, e => {
         this.previewList.push(window.webkitURL.createObjectURL(e));
@@ -57,34 +97,24 @@ export default {
     },
     handleRemove(file) {
       console.log(file);
-    },
-    handlePictureCardPreview(file) {
-      console.log("zzz");
-      console.log(file);
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
-    },
-    handleDownload(file) {
-      console.log(file);
-    },
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-    },
-    beforeAvatarUpload(file) {
-      console.log(file);
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      return false;
     }
   }
 };
 </script>
 <style lang="less">
+.main {
+  width: 900px;
+  margin: 0 auto;
+  .fullscreen_btn{
+    width: 70%;
+    display: block;
+    margin: 20px auto 0 auto;
+  }
+}
 .upload_box {
   position: relative;
   display: inline-block;
-  width: 700px;
+  width: 100%;
   height: 300px;
   border: 1px dashed #333;
   .preview_wrapper {
@@ -100,15 +130,18 @@ export default {
       //width: 20%;
       height: 90%;
     }
+    img.preview:hover {
+      opacity: 0.5;
+    }
   }
 
   .tips {
     position: absolute;
     left: 50%;
-    top:40%;
+    top: 40%;
     transform: translateX(-50%);
     background-color: #fff;
-    opacity: .8;
+    opacity: 0.8;
     color: #000;
     //color: #a3a7ae;
     text-align: center;
@@ -126,6 +159,16 @@ export default {
     width: 100%;
     height: 100%;
   }
+}
+.fullscreen_list {
+  display: flex;
+  img{
+    display: block
+  }
+  // img {
+  //   width: 25%;
+  //   //height: 100%;
+  // }
 }
 </style>
 
