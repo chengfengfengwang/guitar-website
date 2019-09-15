@@ -10,24 +10,19 @@
             :src="preview"
             :key="index"
             alt
-          >
+          />
         </div>
-        <input @change="changeFile" id="myFile" type="file" name="file" multiple>
+        <input @change="changeFile" id="myFile" type="file" name="file" multiple />
 
         <div class="tips" @drop="handleDrop">
           <i class="el-icon-plus"></i>
           <div>点击选择文件或者将文件拖拽至此处</div>
         </div>
       </div>
-      <div v-show="fullscreenShow" ref="fullscreenWrapper" class="fullscreen_list">
-        <img
-          :class="'preview'+previewList.length"
-          class="preview"
-          v-for="(preview,index) in previewList"
-          :src="preview"
-          :key="index"
-          alt
-        >
+      <div v-show="fullscreenShow" ref="fullscreenWrapper" class="fullscreen_display_wrapper">
+        <div v-for="(preview,index) in previewList" :key="index">
+          <img :src="preview" alt />
+        </div>
       </div>
       <div>
         <el-button class="fullscreen_btn" type="primary" round @click="toFullScreen">全屏</el-button>
@@ -43,12 +38,12 @@ export default {
       dialogVisible: false,
       disabled: false,
       fullscreenShow: true,
-      //previewList: []
-      previewList: [
-        "http://data.17jita.com/attachment/portal/201907/08/133548ke65tllllkzh8vjk.png",
-        "http://data.17jita.com/attachment/portal/201907/08/133549q88g800ob7bidg18.png",
-        "http://data.17jita.com/attachment/portal/201907/08/133550o6hq6xoxdilhdq69.png"
-      ]
+      previewList: []
+      // previewList: [
+      //   "http://data.17jita.com/attachment/portal/201907/08/133548ke65tllllkzh8vjk.png",
+      //   "http://data.17jita.com/attachment/portal/201907/08/133549q88g800ob7bidg18.png",
+      //   "http://data.17jita.com/attachment/portal/201907/08/133550o6hq6xoxdilhdq69.png"
+      // ]
     };
   },
   mounted() {
@@ -105,7 +100,7 @@ export default {
 .main {
   width: 900px;
   margin: 0 auto;
-  .fullscreen_btn{
+  .fullscreen_btn {
     width: 70%;
     display: block;
     margin: 20px auto 0 auto;
@@ -160,15 +155,18 @@ export default {
     height: 100%;
   }
 }
-.fullscreen_list {
+.fullscreen_display_wrapper {
   display: flex;
-  img{
-    display: block
+  align-items: center;
+  &>div{
+    width: 500px;
+    flex-grow: 1;
   }
-  // img {
-  //   width: 25%;
-  //   //height: 100%;
-  // }
+  &>div>img {
+    width: 100%;
+    // 防止图片高度溢出
+    max-height: 100vh
+  }
 }
 </style>
 
