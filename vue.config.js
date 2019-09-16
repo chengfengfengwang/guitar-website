@@ -1,12 +1,15 @@
 const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
 module.exports = {
+    publicPath: process.env.NODE_ENV === 'production'
+        ? '/my-guitar-tool/'
+        : '/',
     devServer: {
         port: 5588,     // 端口
     },
     css: {
         loaderOptions: {
-            postcss: {  
+            postcss: {
                 plugins: [
                     autoprefixer(),
                     pxtorem({
