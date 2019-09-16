@@ -1,106 +1,183 @@
 <template>
-  <div class="home">
-    <h4 style="font-weight:normal">使用方法：点击浏览选择图片文件，按ctrl可多选，选择完毕后点击全屏</h4>
-    <input id="input" type="file" multiple accept="image/*">
-    <button id="btn">全屏</button>
-    <div class="wrapper"></div>
+  <div class="about">
+    <div class="main">
+      <div @drop="handleDrop" id="uploadBox" class="upload_box">
+        <div ref="previewWrapper" class="preview_wrapper">
+          <img
+            :class="'preview'+previewList.length"
+            class="preview"
+            v-for="(preview,index) in previewList"
+            :src="preview"
+            :key="index"
+            alt
+          />
+        </div>
+        <input @change="changeFile" id="myFile" type="file" name="file" multiple />
+
+        <div class="tips" @drop="handleDrop">
+          <i class="el-icon-plus"></i>
+          <div>点击选择文件或者将文件拖拽至此处</div>
+        </div>
+      </div>
+      <!-- 全屏元素 -->
+      <div v-show="fullscreenShow" ref="fullscreenWrapper" class="fullscreen_display_wrapper">
+        <div :class="previewList.length===1?'contain_one':''" v-for="(preview,index) in previewList" :key="index">
+          <img :src="preview" alt />
+        </div>
+      </div>
+      <div>
+        <el-button class="fullscreen_btn" type="primary" round @click="toFullScreen">全屏</el-button>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
-// @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: "home",
+  data() {
+    return {
+      dialogImageUrl: "",
+      dialogVisible: false,
+      disabled: false,
+      fullscreenShow: false,
+      previewList: []
+      // previewList: [
+      //   "http://data.17jita.com/attachment/portal/201907/08/133548ke65tllllkzh8vjk.png",
+      // ]
+    };
+  },
   mounted() {
-    function openInmobile() {
-      var u = navigator.userAgent;
-      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(u)) {
-        return true;
+    document.querySelector("#myFile").addEventListener("dragover", e => {
+      e.preventDefault();
+    });
+    document.querySelector("#myFile").addEventListener("drop", e => {
+      e.preventDefault();
+    });
+    this.fullscreenWrapper = this.$refs.fullscreenWrapper;
+    this.fullscreenWrapper.addEventListener("fullscreenchange", e => {
+      if (document.fullscreenElement) {
+        //进入全屏
+        this.fullscreenShow = true;
       } else {
-        return false;
-      }
-    }
-    if (openInmobile()) {
-      alert("用电脑打开体验一下！");
-    }
-    var wrapper = document.querySelector(".wrapper");
-
-    var input = document.querySelector("#input");
-    var imgClass;
-    input.addEventListener("change", updateImageDisplay);
-    function updateImageDisplay() {
-      while (wrapper.firstChild) {
-        wrapper.removeChild(wrapper.firstChild);
-      }
-
-      var curFiles = input.files;
-      if (curFiles.length === 0) {
-        var para = document.createElement("p");
-        para.textContent = "No files currently selected for upload";
-        wrapper.appendChild(para);
-      } else {
-        console.log(curFiles.length);
-        if (curFiles.length == 2) {
-          imgClass = "two";
-        } else if (curFiles.length == 3) {
-          imgClass = "three";
-        }
-        for (var i = 0; i < curFiles.length; i++) {
-          var image = document.createElement("img");
-          image.src = window.URL.createObjectURL(curFiles[i]);
-          image.classList.add(imgClass);
-          wrapper.appendChild(image);
-        }
-      }
-    }
-    // document.querySelector('button').addEventListener('click', function () {
-    //     console.log('zzz11')
-    //     if (wrapper.requestFullscreen) {
-    //         console.log('zzz')
-    //         wrapper.requestFullscreen()
-    //     }
-    // })
-    //Get element id "fullscreen"
-    var fullScreenButton = wrapper;
-
-    //Activate click listener
-    document.querySelector("button").addEventListener("click", function() {
-      //Toggle fullscreen off, activate it
-      if (
-        !document.fullscreenElement &&
-        !document.mozFullScreenElement &&
-        !document.webkitFullscreenElement &&
-        !document.msFullscreenElement
-      ) {
-        if (document.documentElement.requestFullscreen) {
-          wrapper.requestFullscreen();
-        } else if (document.documentElement.mozRequestFullScreen) {
-          wrapper.mozRequestFullScreen(); // Firefox
-        } else if (document.documentElement.webkitRequestFullscreen) {
-          wrapper.webkitRequestFullscreen(); // Chrome and Safari
-        } else if (document.documentElement.msRequestFullscreen) {
-          wrapper.msRequestFullscreen(); // IE
-        }
-
-        //Toggle fullscreen on, exit fullscreen
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        }
+        this.fullscreenShow = false;
+        //退出全屏
       }
     });
   },
-  components: {}
+  methods: {
+    toFullScreen() {
+      this.fullscreenWrapper.requestFullscreen();
+    },
+    changeFile(e) {
+      var fileList = e.target.files;
+      Array.prototype.forEach.call(fileList, e => {
+        this.previewList.push(window.webkitURL.createObjectURL(e));
+      });
+    },
+    handleDrop(e) {
+      console.log(e.dataTransfer.files);
+      var fileList = e.dataTransfer.files;
+      //检测是否是拖拽文件到页面的操作
+      if (fileList.length == 0) {
+        return false;
+      }
+      //检测文件是不是图片
+      if (fileList[0].type.indexOf("image") === -1) {
+        alert("您拖的不是图片！");
+        return false;
+      }
+      Array.prototype.forEach.call(fileList, e => {
+        this.previewList.push(window.webkitURL.createObjectURL(e));
+      });
+    },
+    handleRemove(file) {
+      console.log(file);
+    }
+  }
 };
 </script>
-<style lang="less" scoped>
-  
+<style lang="less">
+.main {
+  width: 900px;
+  margin: 0 auto;
+  .fullscreen_btn {
+    width: 70%;
+    display: block;
+    margin: 20px auto 0 auto;
+  }
+}
+.upload_box {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 300px;
+  border: 1px dashed #333;
+  .preview_wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+
+    img.preview {
+      //width: 20%;
+      height: 90%;
+    }
+    img.preview:hover {
+      opacity: 0.5;
+    }
+  }
+
+  .tips {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    opacity: 0.8;
+    color: #000;
+    //color: #a3a7ae;
+    text-align: center;
+    font-size: 14px;
+    .el-icon-plus {
+      font-size: 30px;
+    }
+  }
+  input {
+    z-index: 9;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+.fullscreen_display_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &>div{
+    height: 100vh;
+    //等分剩余空间
+    flex-grow: 1;
+    display: flex;
+    align-items: center
+  }
+  &>div>img {
+    width: 100%;
+    // 防止图片高度溢出
+    max-height: 100vh
+  }
+  .contain_one{
+     flex-grow: 0;
+     width: auto;
+  }
+  .contain_one>img{
+    width: auto;
+  }
+}
 </style>
+
+
