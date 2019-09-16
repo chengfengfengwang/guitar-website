@@ -39,12 +39,10 @@ export default {
       dialogVisible: false,
       disabled: false,
       fullscreenShow: true,
-      previewList: []
-      // previewList: [
-      //   "http://data.17jita.com/attachment/portal/201907/08/133548ke65tllllkzh8vjk.png",
-      //   "http://data.17jita.com/attachment/portal/201907/08/133549q88g800ob7bidg18.png",
-      //   "http://data.17jita.com/attachment/portal/201907/08/133550o6hq6xoxdilhdq69.png"
-      // ]
+      //previewList: []
+      previewList: [
+        "http://data.17jita.com/attachment/portal/201907/08/133548ke65tllllkzh8vjk.png",
+      ]
     };
   },
   mounted() {
@@ -161,9 +159,11 @@ export default {
   justify-content: center;
   align-items: center;
   &>div{
-    width: 500px;
+    height: 100vh;
     //等分剩余空间
     flex-grow: 1;
+    display: flex;
+    align-items: center
   }
   &>div>img {
     width: 100%;
@@ -173,10 +173,9 @@ export default {
   .contain_one{
      flex-grow: 0;
      width: auto;
-    // height: 100vh;
   }
   .contain_one>img{
-    height: 100vh;
+    width: auto;
   }
 }
 </style>
