@@ -1,18 +1,19 @@
 <template>
   <div>
     <el-menu
-      :default-active="activeIndex2"
+      default-active="/"
       class="el-menu-demo"
       mode="horizontal"
       @select="handleSelect"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
+      router
     >
-      <el-menu-item index="1">处理中心</el-menu-item>
+      <el-menu-item index="/">首页</el-menu-item>
      
-      <el-menu-item index="4">
-        <a href="https://www.ele.me" target="_blank">订单管理</a>
+      <el-menu-item index="/me">
+          我的
       </el-menu-item>
     </el-menu>
   </div>
@@ -32,3 +33,9 @@ export default {
   }
 };
 </script>
+<style lang="less" scoped>
+.el-menu-demo{
+    padding-left: 100px;
+    margin-bottom: 10px;
+}
+</style>
