@@ -41,13 +41,14 @@ export default {
       fullscreenShow: false,
       //previewList: []
       previewList: [
-        "http://data.17jita.com/attachment/portal/201907/08/133548ke65tllllkzh8vjk.png",
-        "http://data.17jita.com/attachment/portal/201907/08/133548ke65tllllkzh8vjk.png",
-        "http://data.17jita.com/attachment/portal/201907/08/133548ke65tllllkzh8vjk.png",
-      ]
+        "http://data.17jita.com/attachment/portal/201907/21/151525v69wyqt2xgjrjlzk.png",
+        "http://data.17jita.com/attachment/portal/201907/21/151525jv11u21uwpcpcb1m.png",
+        "http://data.17jita.com/attachment/portal/201907/21/151526eoc4iuhzcetitdpt.png",
+      ],
     };
   },
   mounted() {
+    console.log(JSON.parse(localStorage.getItem('curCollection')))
     document.querySelector("#myFile").addEventListener("dragover", e => {
       e.preventDefault();
     });
