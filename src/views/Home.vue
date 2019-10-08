@@ -1,6 +1,12 @@
 <template>
   <div class="about">
     <div class="main">
+      <h1>图片网址全屏</h1>
+      <div class="input_area">
+        <InputGuitarImg ref="inputImg"/>
+      </div>
+      <el-button class="fullscreen_btn" type="primary" round @click="inputFullScreen">全屏</el-button>
+      <h1>本地图片全屏</h1>
       <div @drop="handleDrop" id="uploadBox" class="upload_box">
         <div ref="previewWrapper" class="preview_wrapper">
           <img
@@ -10,9 +16,9 @@
             :src="preview"
             :key="index"
             alt
-          />
+          >
         </div>
-        <input @change="changeFile" id="myFile" type="file" name="file" multiple />
+        <input @change="changeFile" id="myFile" type="file" name="file" multiple>
 
         <div class="tips" @drop="handleDrop">
           <i class="el-icon-plus"></i>
@@ -21,12 +27,16 @@
       </div>
       <!-- 全屏元素 -->
       <div v-show="fullscreenShow" ref="fullscreenWrapper" class="fullscreen_display_wrapper">
-        <div :class="previewList.length===1?'contain_one':''" v-for="(preview,index) in previewList" :key="index">
-          <img :src="preview" alt />
+        <div
+          :class="previewList.length===1?'contain_one':''"
+          v-for="(preview,index) in previewList"
+          :key="index"
+        >
+          <img :src="preview" alt>
         </div>
       </div>
       <div>
-          <el-button class="clear_btn" round @click="clearSelect" type="warning">清空当前选择</el-button>
+        <el-button class="clear_btn" round @click="clearSelect" type="warning">清空当前选择</el-button>
 
         <el-button class="fullscreen_btn" type="primary" round @click="toFullScreen">全屏</el-button>
       </div>
@@ -34,23 +44,24 @@
   </div>
 </template>
 <script>
+import InputGuitarImg from "./../components/InputGuitarImg/InputGuitarImg";
 export default {
   data() {
     return {
-      dialogImageUrl: "",
-      dialogVisible: false,
-      disabled: false,
+      imgSrc: "",
       fullscreenShow: false,
-      //previewList: []
       previewList: [
         // "http://data.17jita.com/attachment/portal/201907/21/151525v69wyqt2xgjrjlzk.png",
         // "http://data.17jita.com/attachment/portal/201907/21/151525jv11u21uwpcpcb1m.png",
         // "http://data.17jita.com/attachment/portal/201907/21/151526eoc4iuhzcetitdpt.png",
-      ],
+      ]
     };
   },
+  components: {
+    InputGuitarImg
+  },
   mounted() {
-    console.log(JSON.parse(localStorage.getItem('curCollection')))
+    console.log(JSON.parse(localStorage.getItem("curCollection")));
     document.querySelector("#myFile").addEventListener("dragover", e => {
       e.preventDefault();
     });
@@ -69,8 +80,15 @@ export default {
     });
   },
   methods: {
-    clearSelect(){
-      this.previewList = []
+    inputFullScreen() {
+      var imgArr = this.$refs.inputImg.imgArr;
+      this.previewList = imgArr.map(e => {
+        return e.src;
+      });
+      this.toFullScreen();
+    },
+    clearSelect() {
+      this.previewList = [];
     },
     toFullScreen() {
       this.fullscreenWrapper.requestFullscreen();
@@ -107,13 +125,14 @@ export default {
 .main {
   width: 900px;
   margin: 0 auto;
-  .clear_btn,.fullscreen_btn{
+  .clear_btn,
+  .fullscreen_btn {
     width: 70%;
     display: block;
     margin: 20px auto 0 auto;
   }
-  .fullscreen_btn{
-    margin-top: 15px
+  .fullscreen_btn {
+    margin-top: 15px;
   }
 }
 .upload_box {
@@ -169,24 +188,24 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  &>div{
+  & > div {
     //height: 100vh;
     width: 10px;
     //等分剩余空间
     flex-grow: 1;
     display: flex;
-    align-items: center
+    align-items: center;
   }
-  &>div>img {
+  & > div > img {
     width: 100%;
     // 防止图片高度溢出
-    max-height: 100vh
+    max-height: 100vh;
   }
-  .contain_one{
-     flex-grow: 0;
-     width: auto;
+  .contain_one {
+    flex-grow: 0;
+    width: auto;
   }
-  .contain_one>img{
+  .contain_one > img {
     width: auto;
   }
 }
