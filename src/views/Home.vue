@@ -26,6 +26,8 @@
         </div>
       </div>
       <div>
+          <el-button class="clear_btn" round @click="clearSelect" type="warning">清空当前选择</el-button>
+
         <el-button class="fullscreen_btn" type="primary" round @click="toFullScreen">全屏</el-button>
       </div>
     </div>
@@ -41,9 +43,9 @@ export default {
       fullscreenShow: false,
       //previewList: []
       previewList: [
-        "http://data.17jita.com/attachment/portal/201907/21/151525v69wyqt2xgjrjlzk.png",
-        "http://data.17jita.com/attachment/portal/201907/21/151525jv11u21uwpcpcb1m.png",
-        "http://data.17jita.com/attachment/portal/201907/21/151526eoc4iuhzcetitdpt.png",
+        // "http://data.17jita.com/attachment/portal/201907/21/151525v69wyqt2xgjrjlzk.png",
+        // "http://data.17jita.com/attachment/portal/201907/21/151525jv11u21uwpcpcb1m.png",
+        // "http://data.17jita.com/attachment/portal/201907/21/151526eoc4iuhzcetitdpt.png",
       ],
     };
   },
@@ -67,6 +69,9 @@ export default {
     });
   },
   methods: {
+    clearSelect(){
+      this.previewList = []
+    },
     toFullScreen() {
       this.fullscreenWrapper.requestFullscreen();
     },
@@ -102,10 +107,13 @@ export default {
 .main {
   width: 900px;
   margin: 0 auto;
-  .fullscreen_btn {
+  .clear_btn,.fullscreen_btn{
     width: 70%;
     display: block;
     margin: 20px auto 0 auto;
+  }
+  .fullscreen_btn{
+    margin-top: 15px
   }
 }
 .upload_box {
