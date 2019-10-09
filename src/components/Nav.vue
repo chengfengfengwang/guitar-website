@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-menu
-      default-active="/"
+      :default-active="$route.path"
       class="el-menu-demo"
       mode="horizontal"
       @select="handleSelect"
@@ -22,8 +22,9 @@
 export default {
   data() {
     return {
-      activeIndex: "1",
-      activeIndex2: "1"
+      activeIndex: "3",
+      activeIndex2: "2",
+      defaultActive:"/me"
     };
   },
   methods: {

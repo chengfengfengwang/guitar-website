@@ -6,6 +6,7 @@
         <InputGuitarImg ref="inputImg"/>
       </div>
       <el-button class="fullscreen_btn" type="primary" round @click="inputFullScreen">全屏</el-button>
+      <el-button class="fullscreen_btn" type="primary" round @click="collectFormShow=true">收藏</el-button>
       <h1>本地图片全屏</h1>
       <div @drop="handleDrop" id="uploadBox" class="upload_box">
         <div ref="previewWrapper" class="preview_wrapper">
@@ -40,6 +41,24 @@
 
         <el-button class="fullscreen_btn" type="primary" round @click="toFullScreen">全屏</el-button>
       </div>
+      <!-- 收藏对话框 -->
+      <el-dialog title="我的收藏" :visible.sync="collectFormShow">
+        <el-form :model="collectForm">
+          <el-form-item label="名称" label-width="300">
+            <el-input v-model="collectForm.name" autocomplete="off"></el-input>
+          </el-form-item>
+          <!-- <el-form-item label="活动区域" label-width="300">
+            <el-select v-model="collectForm.region" placeholder="请选择活动区域">
+              <el-option label="区域一" value="shanghai"></el-option>
+              <el-option label="区域二" value="beijing"></el-option>
+            </el-select>
+          </el-form-item> -->
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="collectFormShow = false">取 消</el-button>
+          <el-button type="primary" @click="submitCollection">确 定</el-button>
+        </div>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -54,14 +73,15 @@ export default {
         // "http://data.17jita.com/attachment/portal/201907/21/151525v69wyqt2xgjrjlzk.png",
         // "http://data.17jita.com/attachment/portal/201907/21/151525jv11u21uwpcpcb1m.png",
         // "http://data.17jita.com/attachment/portal/201907/21/151526eoc4iuhzcetitdpt.png",
-      ]
+      ],
+      collectForm:{},
+      collectFormShow:false
     };
   },
   components: {
     InputGuitarImg
   },
   mounted() {
-    console.log(JSON.parse(localStorage.getItem("curCollection")));
     document.querySelector("#myFile").addEventListener("dragover", e => {
       e.preventDefault();
     });
@@ -80,6 +100,16 @@ export default {
     });
   },
   methods: {
+    submitCollection(){
+      this.collectForm.imgs=this.$refs.inputImg.imgArr;
+      var collectionList = JSON.parse(localStorage.getItem('collectionList'));
+      collectionList = collectionList?collectionList:[];
+      collectionList.push(this.collectForm)
+      localStorage.setItem('collectionList',JSON.stringify(collectionList))
+      this.collectFormShow = false;
+    },
+    
+    collect() {},
     inputFullScreen() {
       var imgArr = this.$refs.inputImg.imgArr;
       this.previewList = imgArr.map(e => {

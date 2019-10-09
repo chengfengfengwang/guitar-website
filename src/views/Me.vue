@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <Helloworld   v-bind:title.sync="doc.title" /> -->
     <el-button type="primary" round @click="myCollection">我的收藏</el-button>
     <div class="collection_wrapper">
       <div
@@ -17,6 +18,7 @@
   </div>
 </template>
 <script>
+import Helloworld from './../components/HelloWorld'
 export default {
   data() {
     return {
@@ -34,8 +36,18 @@ export default {
             "http://data.17jita.com/attachment/portal/201907/21/151526eoc4iuhzcetitdpt.png"
           ]
         }
-      ]
+      ],
+      postFontSize: 2,
+      doc:{
+        title:'tttt'
+      }
     };
+  },
+  components:{
+    Helloworld
+  },
+  mounted(){
+    this.collectionList = JSON.parse(localStorage.getItem('collectionList'));
   },
   methods: {
     myCollection() {
