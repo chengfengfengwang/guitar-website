@@ -15,6 +15,9 @@
       <el-menu-item index="/me">
           我的
       </el-menu-item>
+      <el-menu-item index="/message">
+          反馈
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
