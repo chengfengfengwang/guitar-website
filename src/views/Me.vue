@@ -15,11 +15,6 @@
         class="collection_list"
       >{{item.name}} <i @click.stop="remove(index)" class="del_icon el-icon-delete" /></div>
     </div>
-    <!-- <div class="img_wrapper">
-        <div v-for="(item,index) in picCollection" :key="index" >
-            <img :src="item" alt>
-        </div>
-    </div>-->
   </div>
 </template>
 <script>
@@ -50,6 +45,7 @@ export default {
   },
   mounted() {
     this.collectionList = JSON.parse(localStorage.getItem("collectionList"));
+    console.log(this.collectionList)
   },
   methods: {
     remove(index){
