@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from './views/Layout.vue';
 import Home from './views/Home.vue'
+import JitaPu from './views/JitaPu.vue'
+import JitapuDetail from './views/JitapuDetail.vue'
 import Me from './views/Me.vue'
 
 Vue.use(Router)
@@ -19,12 +21,22 @@ export default new Router({
           path: '/',
           name: 'home',
           component: Home
+        }, 
+        {
+          path: '/jitapu',
+          name: 'JitaPu',
+          component: JitaPu
+        }, 
+        {
+          path: '/jtpdetail',
+          name: 'JitapuDetail',
+          component: JitapuDetail
         },
         {
           path: '/me',
           name: 'Me',
           component: Me
-        },
+        }, 
         {
           path: '/message',
           name: 'Message',
