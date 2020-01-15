@@ -5,6 +5,7 @@ import Home from './views/Home.vue'
 import JitaPu from './views/JitaPu.vue'
 import JitapuDetail from './views/JitapuDetail.vue'
 import Me from './views/Me.vue'
+import Metronume from './views/Metronume.vue'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
           name: 'Message',
           component: () => import(/* webpackChunkName: "about" */ './views/Message.vue')
         },
+        {
+          path: '/metronume',
+          name: 'Metronume',
+          component: Metronume
+        }, 
       ]
     },
     {
