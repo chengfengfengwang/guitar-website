@@ -5,7 +5,7 @@
       :fullscreenShow.sync="fullscreenShow"
       :previewList="picCollection"
     />
-    <h1>我的收藏</h1>
+    <h1 @click="collect">我的收藏</h1>
     <!-- <el-button type="primary" round @click="myCollection">我的收藏</el-button> -->
     <div class="collection_wrapper">
       <div
@@ -48,6 +48,11 @@ export default {
     console.log(this.collectionList)
   },
   methods: {
+    collect(){
+      this.axios.post(`${process.env.VUE_APP_HOST}/collect`).then(res=>{
+        console.log(res)
+      })
+    },
     remove(index){
       this.collectionList.splice(index,1);
       localStorage.setItem('collectionList',JSON.stringify(this.collectionList))
