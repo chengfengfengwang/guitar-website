@@ -25,10 +25,10 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.form);
-      console.log(process.env.VUE_APP_HOST);
       this.axios.post(`${process.env.VUE_APP_HOST}/login`,this.form).then(res=>{
-        console.log(res)
+        if(res.error===0){
+          this.$router.push('/')
+        }
       })
     }
   }

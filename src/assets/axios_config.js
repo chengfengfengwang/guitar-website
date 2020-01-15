@@ -16,14 +16,8 @@ axios.interceptors.response.use(function (response) {
   // 对响应数据做点什么
   if (response.status == 200 || response.status == 204) {
     const res = response.data;
-    if (res.error == 10006) {
-      alert('登录已过期，请重新登录');
-      localStorage.clear(); 
-      console.log('-------')
-      console.log(location.origin + location.pathname + '#/Login')
-      console.log('-------')
-      location.href = location.origin + location.pathname + '#/Login';
-      return
+    if (res.error) {
+      alert(res.msg);
     }
     return res;
   } else {
