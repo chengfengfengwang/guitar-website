@@ -18,15 +18,18 @@ export default {
   data() {
     return {
       form: {
-        username:'',
-        password:''
+        username:'admin',
+        password:'12345'
       }
     };
   },
   methods: {
     onSubmit() {
-      console.log(this.axios);
       console.log(this.form);
+      console.log(process.env.VUE_APP_HOST);
+      this.axios.post(`${process.env.VUE_APP_HOST}/login`,this.form).then(res=>{
+        console.log(res)
+      })
     }
   }
 };
