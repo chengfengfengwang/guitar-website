@@ -17,19 +17,29 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
         idle: 30000 //The maximum time, in milliseconds, that a connection can be idle before being released
     }
 });
-class User extends Model{};
+class User extends Model { };
 User.init({
-    username:{
-        type:Sequelize.STRING,
-        allowNull:false
+    username: {
+        type: Sequelize.STRING,
+        allowNull: false
     },
-    password:{
-        type:Sequelize.STRING,
-        allowNull:false
+    password: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
-},{
+}, {
     sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
 })
+function register(regUser) {
+    return new Promise((resolve, reject) => {
+        User
+            .findOrCreate({ where: {username:regUser.username}, defaults:{password:regUser.password}})
+            .then(([user, created]) => {
+                resolve(created)
+            })
+    })
+}
+
 ///数据库
 app.use(cors());
 app.use(bodyParser());
@@ -38,12 +48,22 @@ router.post('/login', async (ctx, next) => {
         username = ctx.request.body.username || '',
         password = ctx.request.body.password || '';
     if (username === 'admin' && password === '12345') {
-        ctx.response.body = { error: 0,data: 'ok' };
+        ctx.response.body = { error: 0, data: 'ok' };
     } else {
         ctx.response.body = { error: 1, msg: '密码错误' };
     }
 });
-console.log('---')
+router.post('/register', async (ctx, next) => {
+    var
+        username = ctx.request.body.username || '',
+        password = ctx.request.body.password || '';
+    var create = await register({ username, password });
+    if (create) {
+        ctx.response.body = { error: 0, data: '注册成功' }
+    } else {
+        ctx.response.body = { error: 0, data: '用户名已存在' }
+    }
+});
 router.post('/collect', async (ctx, next) => {
     // var
     //     username = ctx.request.body.username || '',

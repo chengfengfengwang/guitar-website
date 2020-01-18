@@ -1,5 +1,5 @@
 var config = {
-    database: 'test', // 使用哪个数据库
+    database: 'guitar', // 使用哪个数据库
     username: 'root', // 用户名
     password: 'admin123456', // 口令
     host: 'localhost', // 主机名
