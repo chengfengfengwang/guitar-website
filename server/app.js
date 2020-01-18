@@ -6,17 +6,30 @@ const router = require('koa-router')();
 
 ///数据库
 const Sequelize = require('sequelize');
+const Model = Sequelize.Model;
 const config = require('./config');
 var sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
     dialect: 'mysql',
     pool: {
-        max: 5,
+        max: 5, //Maximum number of connection in pool
         min: 0,
-        idle: 30000
+        idle: 30000 //The maximum time, in milliseconds, that a connection can be idle before being released
     }
 });
-
+class User extends Model{};
+User.init({
+    username:{
+        type:Sequelize.STRING,
+        allowNull:false
+    },
+    password:{
+        type:Sequelize.STRING,
+        allowNull:false
+    }
+},{
+    sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
+})
 ///数据库
 app.use(cors());
 app.use(bodyParser());
