@@ -61,11 +61,44 @@ Gtab.init({
 }, {
     sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
 })
-Gtab.create({
-    name:'我',
-    uploader:'qwe'
-})
+// Gtab.create({
+//     name:'我',
+//     uploader:'qwe'
+// })
 //Gtab.sync();
+class GtabImg extends Model {};
+GtabImg.init({
+    gtab_id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+    },
+    img_order: {
+        type: Sequelize.INTEGER,
+        primaryKey: true
+    },
+    src: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }
+}, {
+    sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
+})
+//GtabImg.sync();
+// GtabImg.create({
+//     gtab_id:2,
+//     img_order:0,
+//     src:'bvn'
+// })
+// GtabImg.create({
+//     gtab_id:2,
+//     img_order:1,
+//     src:'fgh'
+// })
+// GtabImg.create({
+//     gtab_id:2,
+//     img_order:2,
+//     src:'ty'
+// })
 ///数据库
 app.use(cors());
 app.use(bodyParser());
