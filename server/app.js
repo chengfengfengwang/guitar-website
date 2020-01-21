@@ -57,15 +57,30 @@ Gtab.init({
     uploader: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    like: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    hit: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    clec_num: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
     }
 }, {
     sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
 })
 // Gtab.create({
-//     name:'我',
-//     uploader:'qwe'
+//     name:'三十岁的女人',
+//     uploader:'小王',
+//     hit:1
 // })
 //Gtab.sync();
+
+  
 class GtabImg extends Model {};
 GtabImg.init({
     gtab_id: {
@@ -85,23 +100,35 @@ GtabImg.init({
 })
 //GtabImg.sync();
 // GtabImg.create({
-//     gtab_id:2,
+//     gtab_id:1,
 //     img_order:0,
-//     src:'bvn'
+//     src:'http://data.17jita.com/attachment/portal/201912/10/152008hc46m3yd732m3w4m.gif'
 // })
 // GtabImg.create({
-//     gtab_id:2,
+//     gtab_id:1,
 //     img_order:1,
-//     src:'fgh'
+//     src:'http://data.17jita.com/attachment/portal/201912/10/152009gxtyn24czenqz1q0.gif'
 // })
 // GtabImg.create({
-//     gtab_id:2,
+//     gtab_id:1,
 //     img_order:2,
-//     src:'ty'
+//     src:'http://data.17jita.com/attachment/portal/201912/10/152009m3usq8davv384itz.gif'
 // })
 ///数据库
 app.use(cors());
 app.use(bodyParser());
+router.get('/gtabDetail/:id', async (ctx, next) => {
+    var imgList = await GtabImg.findAll({
+        where: {gtab_id: ctx.params.id},
+        //attributes: ['src']
+      })
+     ctx.response.body = { error: 0, data: imgList };  
+ });
+router.get('/gtabList', async (ctx, next) => {
+   var gtabList = await Gtab.findAll({
+      })
+    ctx.response.body = { error: 0, data: gtabList };  
+});
 router.post('/login', async (ctx, next) => {
     var
         username = ctx.request.body.username || '',

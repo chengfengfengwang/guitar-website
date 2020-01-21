@@ -11,14 +11,10 @@
       router
     >
       <el-menu-item index="/">首页</el-menu-item>
-     <el-menu-item index="/jitapu">吉他谱</el-menu-item>
-     <el-menu-item index="/jtpdetail">吉他谱详情</el-menu-item>
-      <el-menu-item index="/me"> 
-          我的
-      </el-menu-item>
-      <el-menu-item index="/message">
-          反馈
-      </el-menu-item>
+      <el-menu-item index="/jitapu">吉他谱</el-menu-item>
+      <!-- <el-menu-item index="/jtpdetail">吉他谱详情</el-menu-item> -->
+      <el-menu-item index="/me">我的</el-menu-item>
+      <el-menu-item index="/message">反馈</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -28,7 +24,7 @@ export default {
     return {
       activeIndex: "3",
       activeIndex2: "2",
-      defaultActive:"/me"
+      defaultActive: "/me"
     };
   },
   methods: {
@@ -39,8 +35,8 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.el-menu-demo{
-    padding-left: 100px;
-    margin-bottom: 10px;
+.el-menu-demo {
+  padding-left: 100px;
+  margin-bottom: 10px;
 }
 </style>
