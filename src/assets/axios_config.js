@@ -1,7 +1,7 @@
 import axios from 'axios';
 //import store from './../store/index';
 //axios.defaults.headers.common['token'] = store.state.userInfo.token;
-//axios.defaults.headers.common['uid'] = store.state.userInfo.uid;
+//axios.defaults.headers.common['user_id'] = store.state.userInfo.user_id;
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么

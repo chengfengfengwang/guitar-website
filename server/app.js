@@ -13,7 +13,7 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
     dialect: 'mysql',
     define: {
         charset: 'utf8',
-        collate: 'utf8_general_ci', 
+        collate: 'utf8_general_ci',
     },
     pool: {
         max: 5, //Maximum number of connection in pool
@@ -23,6 +23,11 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
 });
 class User extends Model { };
 User.init({
+    user_id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
     username: {
         type: Sequelize.STRING,
         allowNull: false
@@ -32,18 +37,19 @@ User.init({
         allowNull: false
     }
 }, {
-    sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
-})
+        sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
+    })
+//User.sync();
 function register(regUser) {
     return new Promise((resolve, reject) => {
         User
-            .findOrCreate({ where: {username:regUser.username}, defaults:{password:regUser.password}})
+            .findOrCreate({ where: { username: regUser.username }, defaults: { password: regUser.password } })
             .then(([user, created]) => {
                 resolve(created)
             })
     })
 }
-class Gtab extends Model {};
+class Gtab extends Model { };
 Gtab.init({
     gtab_id: {
         type: Sequelize.INTEGER,
@@ -71,8 +77,8 @@ Gtab.init({
         defaultValue: 0
     }
 }, {
-    sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
-})
+        sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
+    })
 // Gtab.create({
 //     name:'三十岁的女人',
 //     uploader:'小王',
@@ -80,8 +86,8 @@ Gtab.init({
 // })
 //Gtab.sync();
 
-  
-class GtabImg extends Model {};
+
+class GtabImg extends Model { };
 GtabImg.init({
     gtab_id: {
         type: Sequelize.INTEGER,
@@ -96,8 +102,8 @@ GtabImg.init({
         allowNull: false
     }
 }, {
-    sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
-})
+        sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
+    })
 //GtabImg.sync();
 // GtabImg.create({
 //     gtab_id:1,
@@ -114,30 +120,41 @@ GtabImg.init({
 //     img_order:2,
 //     src:'http://data.17jita.com/attachment/portal/201912/10/152009m3usq8davv384itz.gif'
 // })
+class GtabClect extends Model { };
+GtabClect.init({
+    gtab_id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+    },
+    user_id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true
+    }
+}, {
+        sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
+    })
+//GtabClect.sync();
 ///数据库
 app.use(cors());
 app.use(bodyParser());
 router.get('/gtabDetail/:id', async (ctx, next) => {
     var imgList = await GtabImg.findAll({
-        where: {gtab_id: ctx.params.id},
+        where: { gtab_id: ctx.params.id },
         //attributes: ['src']
-      })
-     ctx.response.body = { error: 0, data: imgList };  
- });
+    })
+    ctx.response.body = { error: 0, data: imgList };
+});
 router.get('/gtabList', async (ctx, next) => {
-   var gtabList = await Gtab.findAll({
-      })
-    ctx.response.body = { error: 0, data: gtabList };  
+    var gtabList = await Gtab.findAll({
+    })
+    ctx.response.body = { error: 0, data: gtabList };
 });
 router.post('/login', async (ctx, next) => {
     var
         username = ctx.request.body.username || '',
         password = ctx.request.body.password || '';
-    if (username === 'admin' && password === '12345') {
-        ctx.response.body = { error: 0, data: 'ok' };
-    } else {
-        ctx.response.body = { error: 1, msg: '密码错误' };
-    }
+    var user = await User.findOne({ where: { username } })
+    ctx.response.body = { error: 0, data: user };
 });
 router.post('/register', async (ctx, next) => {
     var

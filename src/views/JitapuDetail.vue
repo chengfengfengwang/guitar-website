@@ -1,5 +1,6 @@
 <template>
   <div class="jitapu_wrapper">
+      <div>收藏</div>
     <img v-for="img in imgList" :src="img.src" :key="img.img_order" alt>
   </div>
 </template>
