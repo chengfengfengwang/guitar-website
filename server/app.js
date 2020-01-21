@@ -11,6 +11,10 @@ const config = require('./config');
 var sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
     dialect: 'mysql',
+    define: {
+        charset: 'utf8',
+        collate: 'utf8_general_ci', 
+    },
     pool: {
         max: 5, //Maximum number of connection in pool
         min: 0,
@@ -39,7 +43,29 @@ function register(regUser) {
             })
     })
 }
-
+class Gtab extends Model {};
+Gtab.init({
+    gtab_id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    name: {
+        type: Sequelize.TEXT,
+        allowNull: false
+    },
+    uploader: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }
+}, {
+    sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
+})
+Gtab.create({
+    name:'我',
+    uploader:'qwe'
+})
+//Gtab.sync();
 ///数据库
 app.use(cors());
 app.use(bodyParser());
