@@ -168,15 +168,21 @@ router.post('/register', async (ctx, next) => {
     }
 });
 router.post('/collect', async (ctx, next) => {
-    // var
-    //     username = ctx.request.body.username || '',
-    //     password = ctx.request.body.password || '';
-    // if (username === 'admin' && password === '12345') {
-    //     ctx.response.body = { error: 0,data: 'ok' };
-    // } else {
-    //     ctx.response.body = { error: 1, msg: '密码错误' };
-    // }
-    console.log(sequelize)
+    var
+        user_id = ctx.header.user_id,
+        gtab_id = ctx.request.body.gtab_id;
+    console.log({
+        gtab_id,
+        user_id
+    })
+    
+    var res = GtabClect.create({
+        gtab_id,
+        user_id
+    })
+    if(res){
+        ctx.response.body = { error: 0, data: 'ok' };
+    }
 });
 app.use(router.routes());
 // 在端口3000监听:
