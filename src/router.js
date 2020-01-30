@@ -68,10 +68,10 @@ const router = new Router({
   ]
 })
 router.beforeEach((to, from, next) => {
-  if (to.name == 'Login') {
+  if (to.name == 'Login' || to.name == 'Register') {
     next()
   } else {
-    if (store.state.userInfo.user_id) {
+    if (store.getters.user_id) {
       next()
     } else {
       next({

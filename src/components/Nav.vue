@@ -16,6 +16,10 @@
       <el-menu-item index="/me">我的</el-menu-item>
       <el-menu-item index="/message">反馈</el-menu-item>
     </el-menu>
+    <div class="user">
+      {{$store.getters.username}}
+      <span @click="logout">退出登录</span>
+    </div>
   </div>
 </template>
 <script>
@@ -28,6 +32,10 @@ export default {
     };
   },
   methods: {
+    logout(){
+      localStorage.clear();
+      this.$router.push('/login')
+    },
     handleSelect(key, keyPath) {
       //console.log(key, keyPath);
     }
@@ -38,5 +46,11 @@ export default {
 .el-menu-demo {
   padding-left: 100px;
   margin-bottom: 10px;
+}
+.user{
+  color: #fff;
+  position: absolute;
+  right: 20px;
+  top:20px;
 }
 </style>

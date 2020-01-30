@@ -6,6 +6,16 @@ const userInfo = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getI
 const state = {
     userInfo:userInfo
 };
+const getters = {
+    user_id: state => {
+        const userInfo = state.userInfo;
+        return userInfo ? userInfo.user_id : ''
+    },
+    username: state => {
+        const userInfo = state.userInfo;
+        return userInfo ? userInfo.username : ''
+    }
+  }
 const mutations = {
     //存储用户信息
     updateUserInfo(state,userInfo){
@@ -20,6 +30,7 @@ const actions = {
 };
 export default new Vuex.Store({
     state,
+    getters,
     mutations,
     actions
 })

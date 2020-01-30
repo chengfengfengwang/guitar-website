@@ -39,7 +39,7 @@ User.init({
 }, {
         sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
     })
-//User.sync();
+
 function register(regUser) {
     return new Promise((resolve, reject) => {
         User
@@ -49,6 +49,7 @@ function register(regUser) {
             })
     })
 }
+//吉他谱
 class Gtab extends Model { };
 Gtab.init({
     gtab_id: {
@@ -84,9 +85,13 @@ Gtab.init({
 //     uploader:'小王',
 //     hit:1
 // })
-//Gtab.sync();
+Gtab.create({
+    name:'麻雀',
+    uploader:'小王',
+    hit:1
+})
 
-
+//吉他谱图片
 class GtabImg extends Model { };
 GtabImg.init({
     gtab_id: {
@@ -104,7 +109,7 @@ GtabImg.init({
 }, {
         sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
     })
-//GtabImg.sync();
+
 // GtabImg.create({
 //     gtab_id:1,
 //     img_order:0,
@@ -120,6 +125,21 @@ GtabImg.init({
 //     img_order:2,
 //     src:'http://data.17jita.com/attachment/portal/201912/10/152009m3usq8davv384itz.gif'
 // })
+GtabImg.create({
+    gtab_id:2,
+    img_order:0,
+    src:'https://img.jitatang.com/wp-content/uploads/2020/01/2020011213531149.jpeg'
+})
+GtabImg.create({
+    gtab_id:2,
+    img_order:1,
+    src:'https://img.jitatang.com/wp-content/uploads/2020/01/2020011213531266.jpeg'
+})
+GtabImg.create({
+    gtab_id:2,
+    img_order:2,
+    src:'https://img.jitatang.com/wp-content/uploads/2020/01/2020011213531274.jpeg'
+})
 class GtabClect extends Model { };
 GtabClect.init({
     gtab_id: {
@@ -133,7 +153,11 @@ GtabClect.init({
 }, {
         sequelize //Define the sequelize instance to attach to the new Model. Throw error if none is provided.
     })
-//GtabClect.sync();
+
+// User.sync();
+// Gtab.sync();
+// GtabImg.sync();
+// GtabClect.sync();
 ///数据库
 app.use(cors());
 app.use(bodyParser());
