@@ -85,11 +85,11 @@ Gtab.init({
 //     uploader:'小王',
 //     hit:1
 // })
-Gtab.create({
-    name:'麻雀',
-    uploader:'小王',
-    hit:1
-})
+// Gtab.create({
+//     name:'麻雀',
+//     uploader:'小王',
+//     hit:1
+// })
 
 //吉他谱图片
 class GtabImg extends Model { };
@@ -125,21 +125,21 @@ GtabImg.init({
 //     img_order:2,
 //     src:'http://data.17jita.com/attachment/portal/201912/10/152009m3usq8davv384itz.gif'
 // })
-GtabImg.create({
-    gtab_id:2,
-    img_order:0,
-    src:'https://img.jitatang.com/wp-content/uploads/2020/01/2020011213531149.jpeg'
-})
-GtabImg.create({
-    gtab_id:2,
-    img_order:1,
-    src:'https://img.jitatang.com/wp-content/uploads/2020/01/2020011213531266.jpeg'
-})
-GtabImg.create({
-    gtab_id:2,
-    img_order:2,
-    src:'https://img.jitatang.com/wp-content/uploads/2020/01/2020011213531274.jpeg'
-})
+// GtabImg.create({
+//     gtab_id:2,
+//     img_order:0,
+//     src:'https://img.jitatang.com/wp-content/uploads/2020/01/2020011213531149.jpeg'
+// })
+// GtabImg.create({
+//     gtab_id:2,
+//     img_order:1,
+//     src:'https://img.jitatang.com/wp-content/uploads/2020/01/2020011213531266.jpeg'
+// })
+// GtabImg.create({
+//     gtab_id:2,
+//     img_order:2,
+//     src:'https://img.jitatang.com/wp-content/uploads/2020/01/2020011213531274.jpeg'
+// })
 class GtabClect extends Model { };
 GtabClect.init({
     gtab_id: {
@@ -207,6 +207,11 @@ router.post('/collect', async (ctx, next) => {
     if(res){
         ctx.response.body = { error: 0, data: 'ok' };
     }
+});
+router.get('/mycollect', async (ctx, next) => {
+    // var gtabList = await Gtab.findAll({
+    // })
+    // ctx.response.body = { error: 0, data: gtabList };
 });
 app.use(router.routes());
 // 在端口3000监听:

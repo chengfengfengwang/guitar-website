@@ -1,24 +1,18 @@
 <template>
   <div class="main">
-    <FullScreen
-      ref="fullscreenWrapper"
-      :fullscreenShow.sync="fullscreenShow"
-      :previewList="picCollection"
-    />
-    <h1 @click="collect">我的收藏</h1>
+    <h1>我的收藏ad</h1>
     <!-- <el-button type="primary" round @click="myCollection">我的收藏</el-button> -->
-    <div class="collection_wrapper">
+    <!-- <div class="collection_wrapper">
       <div
         @click="goDetail(item)"
         v-for="(item,index) in collectionList"
         :key="index"
         class="collection_list"
       >{{item.name}} <i @click.stop="remove(index)" class="del_icon el-icon-delete" /></div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
-import FullScreen from "./../components/FullScreen/FullScreen";
 export default {
   data() {
     return {
@@ -37,12 +31,9 @@ export default {
           ]
         }
       ],
-      fullscreenShow: false
     };
   },
-  components: {
-    FullScreen
-  },
+ 
   mounted() {
     this.collectionList = JSON.parse(localStorage.getItem("collectionList"));
     console.log(this.collectionList)
@@ -61,11 +52,7 @@ export default {
       console.log(this.picCollection);
     },
     goDetail(item) {
-      this.fullscreenShow = true;
-      this.picCollection = item.imgs;
-      this.$nextTick(() => {
-        this.$refs.fullscreenWrapper.$el.requestFullscreen()
-      });
+    
     }
   }
 };
