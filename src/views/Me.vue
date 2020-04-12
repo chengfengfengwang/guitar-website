@@ -9,7 +9,7 @@
         :key="index"
         class="collection_list"
       >{{item.name}} <i @click.stop="remove(index)" class="del_icon el-icon-delete" /></div>
-    </div> -->
+    </div>-->
   </div>
 </template>
 <script>
@@ -30,30 +30,31 @@ export default {
             "http://data.17jita.com/attachment/portal/201907/21/151526eoc4iuhzcetitdpt.png"
           ]
         }
-      ],
+      ]
     };
   },
- 
+
   mounted() {
     this.collectionList = JSON.parse(localStorage.getItem("collectionList"));
-    console.log(this.collectionList)
+    console.log(this.collectionList);
   },
   methods: {
-    collect(){
-      this.axios.post(`${process.env.VUE_APP_HOST}/collect`).then(res=>{
-        console.log(res)
-      })
+    getMyCollections() {
+      this.axios.get(`${process.env.VUE_APP_HOST}/myCollections`).then(res => {
+        console.log(res);
+      });
     },
-    remove(index){
-      this.collectionList.splice(index,1);
-      localStorage.setItem('collectionList',JSON.stringify(this.collectionList))
+    remove(index) {
+      this.collectionList.splice(index, 1);
+      localStorage.setItem(
+        "collectionList",
+        JSON.stringify(this.collectionList)
+      );
     },
     myCollection() {
       console.log(this.picCollection);
     },
-    goDetail(item) {
-    
-    }
+    goDetail(item) {}
   }
 };
 </script>
@@ -72,11 +73,11 @@ export default {
 .collection_wrapper {
   margin: 20px 0;
   padding: 0 20px;
-  .del_icon{
-    display: none
+  .del_icon {
+    display: none;
   }
-  .collection_list:hover{
-    .del_icon{
+  .collection_list:hover {
+    .del_icon {
       display: inline-block;
       vertical-align: center;
     }

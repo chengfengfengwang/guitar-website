@@ -208,7 +208,7 @@ router.post('/collect', async (ctx, next) => {
         ctx.response.body = { error: 0, data: 'ok' };
     }
 });
-router.get('/mycollect', async (ctx, next) => {
+router.get('/myCollections', async (ctx, next) => {
     // var gtabList = await Gtab.findAll({
     // })
     // ctx.response.body = { error: 0, data: gtabList };
