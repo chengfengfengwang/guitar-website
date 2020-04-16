@@ -5,8 +5,8 @@
       <div class="input_area">
         <InputGuitarImg ref="inputImg"/>
       </div>
-      <el-button class="fullscreen_btn" type="primary" round @click="inputFullScreen">全屏</el-button>
-      <el-button class="fullscreen_btn collect_btn" type="success" round @click="collectFormShow=true">收藏</el-button>
+      <el-button class="fullscreen_btn" type="primary" round @click="inputFullScreen">确定</el-button>
+      <!-- <el-button class="fullscreen_btn collect_btn" type="success" round @click="collectFormShow=true">收藏</el-button> -->
       <!-- <h1>本地图片全屏</h1>
       <div @drop="handleDrop" id="uploadBox" class="upload_box">
         <div ref="previewWrapper" class="preview_wrapper">

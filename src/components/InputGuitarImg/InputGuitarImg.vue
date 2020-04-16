@@ -37,6 +37,9 @@ export default {
       this.imgArr.splice(index + 1, 0, {});
     },
     remove(index) {
+      if(this.imgArr.length==1){
+        return
+      }
       this.imgArr.splice(index, 1);
     }
   }
