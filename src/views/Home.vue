@@ -7,7 +7,7 @@
       </div>
       <el-button class="fullscreen_btn" type="primary" round @click="inputFullScreen">全屏</el-button>
       <el-button class="fullscreen_btn collect_btn" type="success" round @click="collectFormShow=true">收藏</el-button>
-      <h1>本地图片全屏</h1>
+      <!-- <h1>本地图片全屏</h1>
       <div @drop="handleDrop" id="uploadBox" class="upload_box">
         <div ref="previewWrapper" class="preview_wrapper">
           <img
@@ -26,6 +26,10 @@
           <div>点击选择文件或者将文件拖拽至此处</div>
         </div>
       </div>
+      <div>
+        <el-button class="clear_btn" round @click="clearSelect" type="warning">清空当前选择</el-button>
+        <el-button class="fullscreen_btn" type="primary" round @click="toFullScreen">全屏</el-button>
+      </div> -->
       <!-- 全屏元素 -->
       <div v-show="fullscreenShow" ref="fullscreenWrapper" class="fullscreen_display_wrapper">
         <div
@@ -36,11 +40,7 @@
           <img :src="preview" alt>
         </div>
       </div>
-      <div>
-        <el-button class="clear_btn" round @click="clearSelect" type="warning">清空当前选择</el-button>
-
-        <el-button class="fullscreen_btn" type="primary" round @click="toFullScreen">全屏</el-button>
-      </div>
+      
       <!-- 收藏对话框 -->
       <el-dialog title="我的收藏" :visible.sync="collectFormShow">
         <el-form :model="collectForm">
@@ -82,12 +82,12 @@ export default {
     InputGuitarImg
   },
   mounted() {
-    document.querySelector("#myFile").addEventListener("dragover", e => {
-      e.preventDefault();
-    });
-    document.querySelector("#myFile").addEventListener("drop", e => {
-      e.preventDefault();
-    });
+    // document.querySelector("#myFile").addEventListener("dragover", e => {
+    //   e.preventDefault();
+    // });
+    // document.querySelector("#myFile").addEventListener("drop", e => {
+    //   e.preventDefault();
+    // });
     this.fullscreenWrapper = this.$refs.fullscreenWrapper;
     this.fullscreenWrapper.addEventListener("fullscreenchange", e => {
       if (document.fullscreenElement) {

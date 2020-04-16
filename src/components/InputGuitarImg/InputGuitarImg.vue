@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="(item,index) in imgArr" :key="index" class="item">
-      <span class="label">图片{{index+1}}</span>
+      <!-- <span class="label">图片{{index+1}}</span> -->
       <el-input style="width:700px" placeholder="输入图片地址" v-model="item.src"></el-input>
       <i @click="add(index)" class="icon el-icon-circle-plus-outline"></i>
       <i @click="remove(index)" class="icon el-icon-remove-outline"></i>
@@ -45,6 +45,7 @@ export default {
 <style lang="less" scoped>
 .item {
   margin-bottom: 10px;
+  text-align: center;
   .label {
     display: inline-block;
     width: 60px;

@@ -7,6 +7,7 @@ import JitaPu from './views/JitaPu.vue'
 import JitapuDetail from './views/JitapuDetail.vue'
 import Me from './views/Me.vue'
 import Metronume from './views/Metronume.vue'
+import UseGuide from './views/UseGuide.vue'
 
 Vue.use(Router);
 const router = new Router({
@@ -22,6 +23,11 @@ const router = new Router({
           path: '/',
           name: 'home',
           component: Home
+        },
+        {
+          path: '/UseGuide',
+          name: 'UseGuide',
+          component: UseGuide
         },
         {
           path: '/jitapu',
@@ -68,16 +74,17 @@ const router = new Router({
   ]
 })
 router.beforeEach((to, from, next) => {
-  if (to.name == 'Login' || to.name == 'Register') {
+  if (to.name == 'Login') {
     next()
   } else {
-    if (store.getters.user_id) {
-      next()
-    } else {
-      next({
-        path: '/Login'
-      })
-    }
+    // if (store.state.userInfo.user_id) {
+    //   next()
+    // } else {
+    //   next({
+    //     path: '/Login'
+    //   })
+    // }
+    next()
   }
 })
 export default router
