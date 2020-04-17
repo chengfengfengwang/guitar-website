@@ -11,15 +11,21 @@
       router
     >
       <el-menu-item index="/">首页</el-menu-item>
-      <el-menu-item index="/jitapu">吉他谱</el-menu-item>
-      <!-- <el-menu-item index="/jtpdetail">吉他谱详情</el-menu-item> -->
-      <el-menu-item index="/me">我的</el-menu-item>
+      <!-- <el-menu-item index="/jitapu">吉他谱</el-menu-item>
+      <el-menu-item index="/jtpdetail">吉他谱详情</el-menu-item>
+      <el-menu-item index="/me">我的</el-menu-item>-->
       <el-menu-item index="/message">反馈</el-menu-item>
+      <!-- <el-menu-item index="/" disabled>
+        <img class="wechat" src="../assets/img/common/wechat1.png" alt>
+      </el-menu-item> -->
+      <div class="nav_items">
+        <img class="wechat" src="../assets/img/common/wechat.png" alt="">
+      </div>
     </el-menu>
-    <div class="user">
+    <!-- <div class="user">
       {{$store.getters.username}}
       <span @click="logout">退出登录</span>
-    </div>
+    </div>-->
   </div>
 </template>
 <script>
@@ -32,9 +38,9 @@ export default {
     };
   },
   methods: {
-    logout(){
+    logout() {
       localStorage.clear();
-      this.$router.push('/login')
+      this.$router.push("/login");
     },
     handleSelect(key, keyPath) {
       //console.log(key, keyPath);
@@ -47,10 +53,16 @@ export default {
   padding-left: 100px;
   margin-bottom: 10px;
 }
-.user{
+.user {
   color: #fff;
   position: absolute;
   right: 20px;
-  top:20px;
+  top: 20px;
+}
+.nav_items{
+
+}
+img.wechat {
+  width: 30px;
 }
 </style>
