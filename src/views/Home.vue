@@ -6,9 +6,12 @@
         <InputGuitarImg ref="inputImg"/>
       </div>
       <el-button class="fullscreen_btn" type="primary" round @click="inputFullScreen">确定</el-button>
+      <div class="guide">
+        <router-link to="/Useguide">不知道怎么使用？</router-link>
+      </div>
       
       <!-- <el-button class="fullscreen_btn collect_btn" type="success" round @click="collectFormShow=true">收藏</el-button> -->
-      <!-- <h1>本地图片全屏</h1>
+      <h1>本地图片全屏</h1>
       <div @drop="handleDrop" id="uploadBox" class="upload_box">
         <div ref="previewWrapper" class="preview_wrapper">
           <img
@@ -30,7 +33,7 @@
       <div>
         <el-button class="clear_btn" round @click="clearSelect" type="warning">清空当前选择</el-button>
         <el-button class="fullscreen_btn" type="primary" round @click="toFullScreen">全屏</el-button>
-      </div> -->
+      </div>
       <!-- 全屏元素 -->
       <div v-show="fullscreenShow" ref="fullscreenWrapper" class="fullscreen_display_wrapper">
         <div
@@ -241,6 +244,11 @@ export default {
   .contain_one > img {
     width: auto;
   }
+}
+.guide{
+  margin-top:20px;
+  font-size: 15px;
+  text-align: center
 }
 </style>
 

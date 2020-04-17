@@ -1,25 +1,6 @@
 <template>
   <div>
-    <el-menu
-      :default-active="$route.path"
-      class="el-menu-demo"
-      mode="horizontal"
-      @select="handleSelect"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b"
-      router
-    >
-      <el-menu-item index="/">首页</el-menu-item>
-      <el-menu-item index="/jitapu">吉他谱</el-menu-item>
-      <!-- <el-menu-item index="/jtpdetail">吉他谱详情</el-menu-item> -->
-      <el-menu-item index="/me">我的</el-menu-item>
-      <el-menu-item index="/message">反馈</el-menu-item>
-    </el-menu>
-    <div class="user">
-      {{$store.getters.username}}
-      <span @click="logout">退出登录</span>
-    </div>
+    去玩儿
   </div>
 </template>
 <script>
