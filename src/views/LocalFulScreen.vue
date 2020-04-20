@@ -37,7 +37,7 @@
 
         <el-button class="fullscreen_btn" type="primary" round @click="toFullScreen">全屏</el-button>
         <div class="guide">
-        <router-link style="margin-right:10px" to="/LocalFulScreen">使用线上图片？</router-link>
+        <router-link style="margin-right:10px" to="/">使用线上图片？</router-link>
         <router-link to="/Useguide">不知道怎么使用？</router-link>
       </div>
       </div>

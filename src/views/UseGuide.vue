@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <h1>使用指南</h1>
-    <h2>方法一：使用线上图片</h2>
+    <h2 @click="$router.push('/')">方法一：使用线上图片</h2>
     <div class="step">
       <h3>1. 任意打开你找到的吉他谱网站，鼠标右键吉他谱图片=>复制图片链接</h3>
       <div>
@@ -18,7 +18,7 @@
       <h3>3. 图片地址复制粘贴完毕后，点击确定按钮</h3>
     </div>
 
-    <h2 style="margin-top:80px;margin-bottom:60px">方法二：使用本地图片</h2>
+    <h2 @click="$router.push('/LocalFulScreen')" style="margin-top:80px;margin-bottom:60px">方法二：使用本地图片</h2>
     <div class="step">
       <h3>1. 点击选择图片按钮</h3>
       <div>
@@ -52,6 +52,11 @@ export default {
 h2{
   position: relative;
   left: -20px;
+}
+h2:hover{
+  color: blueviolet;
+  text-decoration: underline;
+  cursor: pointer;
 }
 .step {
   margin: 30px 0 50px 0;
