@@ -21,11 +21,11 @@ module.exports = {
         }
     },
     chainWebpack: config => {
-        const imgRule = config.module.rule('images');
-        if (process.env.NODE_ENV === 'production') {
-            imgRule.use('image-webpack-loader')
-                .loader('image-webpack-loader');
-        }
+        // const imgRule = config.module.rule('images');
+        // if (process.env.NODE_ENV === 'production') {
+        //     imgRule.use('image-webpack-loader')
+        //         .loader('image-webpack-loader');
+        // }
         config.module
             .rule("vue")
             .use("vue-loader")
