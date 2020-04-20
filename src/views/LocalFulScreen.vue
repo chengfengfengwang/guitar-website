@@ -1,19 +1,9 @@
 <template>
   <div class="about">
     <div class="main">
-      <h1>图片网址全屏</h1>
-      <div class="input_area">
-        <InputGuitarImg ref="inputImg"/>
-      </div>
-      <el-button class="fullscreen_btn" type="primary" round @click="inputFullScreen">确定</el-button>
-      <div class="guide">
-        <router-link style="margin-right:10px" to="/LocalFulScreen">已有本地图片？</router-link>
-        <router-link to="/Useguide">不知道怎么使用？</router-link>
-      </div>
-      
       <!-- <el-button class="fullscreen_btn collect_btn" type="success" round @click="collectFormShow=true">收藏</el-button> -->
-      <!-- <h1>本地图片全屏</h1>
-      <div @drop="handleDrop" id="uploadBox" class="upload_box">
+      <h1>本地图片全屏</h1>
+      <div v-show="previewList.length!=0" id="uploadBox" class="upload_box">
         <div ref="previewWrapper" class="preview_wrapper">
           <img
             :class="'preview'+previewList.length"
@@ -24,17 +14,33 @@
             alt
           >
         </div>
-        <input @change="changeFile" id="myFile" type="file" name="file" accept="image/*" multiple>
+        <input @change="changeFile" accept="image/*" id="myFile" type="file" name="file" multiple>
 
-        <div class="tips" @drop="handleDrop">
+        <!-- <div class="tips">
           <i class="el-icon-plus"></i>
           <div>点击选择文件或者将文件拖拽至此处</div>
-        </div>
+        </div>-->
       </div>
       <div>
-        <el-button class="clear_btn" round @click="clearSelect" type="warning">清空当前选择</el-button>
+        <div class="choose_btn_wrapper" @click="clearSelect">
+          <el-button class="clear_btn" round  type="warning">{{previewList.length!=0?'重新选择':'选择图片'}}</el-button>
+          <input
+            class="choose_input"
+            @change="changeFile"
+            id="myFile"
+            type="file"
+            accept="image/*"
+            name="file"
+            multiple
+          >
+        </div>
+
         <el-button class="fullscreen_btn" type="primary" round @click="toFullScreen">全屏</el-button>
-      </div> -->
+        <div class="guide">
+        <router-link style="margin-right:10px" to="/LocalFulScreen">使用线上图片？</router-link>
+        <router-link to="/Useguide">不知道怎么使用？</router-link>
+      </div>
+      </div>
       <!-- 全屏元素 -->
       <div v-show="fullscreenShow" ref="fullscreenWrapper" class="fullscreen_display_wrapper">
         <div
@@ -45,7 +51,7 @@
           <img :src="preview" alt>
         </div>
       </div>
-      
+
       <!-- 收藏对话框 -->
       <el-dialog title="我的收藏" :visible.sync="collectFormShow">
         <el-form :model="collectForm">
@@ -57,7 +63,7 @@
               <el-option label="区域一" value="shanghai"></el-option>
               <el-option label="区域二" value="beijing"></el-option>
             </el-select>
-          </el-form-item> -->
+          </el-form-item>-->
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="collectFormShow = false">取 消</el-button>
@@ -79,8 +85,8 @@ export default {
         // "http://data.17jita.com/attachment/portal/201907/21/151525jv11u21uwpcpcb1m.png",
         // "http://data.17jita.com/attachment/portal/201907/21/151526eoc4iuhzcetitdpt.png",
       ],
-      collectForm:{},
-      collectFormShow:false
+      collectForm: {},
+      collectFormShow: false
     };
   },
   components: {
@@ -105,25 +111,17 @@ export default {
     });
   },
   methods: {
-    submitCollection(){
-      this.collectForm.imgs=this.$refs.inputImg.imgArr.map(e => {
+    submitCollection() {
+      this.collectForm.imgs = this.$refs.inputImg.imgArr.map(e => {
         return e.src;
       });
-      var collectionList = JSON.parse(localStorage.getItem('collectionList'));
-      collectionList = collectionList?collectionList:[];
-      collectionList.push(this.collectForm)
-      localStorage.setItem('collectionList',JSON.stringify(collectionList))
+      var collectionList = JSON.parse(localStorage.getItem("collectionList"));
+      collectionList = collectionList ? collectionList : [];
+      collectionList.push(this.collectForm);
+      localStorage.setItem("collectionList", JSON.stringify(collectionList));
       this.collectFormShow = false;
     },
-    
-    collect() {},
-    inputFullScreen() {
-      var imgArr = this.$refs.inputImg.imgArr;
-      this.previewList = imgArr.map(e => {
-        return e.src;
-      });
-      this.toFullScreen();
-    },
+
     clearSelect() {
       this.previewList = [];
     },
@@ -132,22 +130,6 @@ export default {
     },
     changeFile(e) {
       var fileList = e.target.files;
-      Array.prototype.forEach.call(fileList, e => {
-        this.previewList.push(window.webkitURL.createObjectURL(e));
-      });
-    },
-    handleDrop(e) {
-      console.log(e.dataTransfer.files);
-      var fileList = e.dataTransfer.files;
-      //检测是否是拖拽文件到页面的操作
-      if (fileList.length == 0) {
-        return false;
-      }
-      //检测文件是不是图片
-      if (fileList[0].type.indexOf("image") === -1) {
-        alert("您拖的不是图片！");
-        return false;
-      }
       Array.prototype.forEach.call(fileList, e => {
         this.previewList.push(window.webkitURL.createObjectURL(e));
       });
@@ -211,15 +193,6 @@ export default {
       font-size: 30px;
     }
   }
-  input {
-    z-index: 9;
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-  }
 }
 .fullscreen_display_wrapper {
   display: flex;
@@ -246,10 +219,13 @@ export default {
     width: auto;
   }
 }
-.guide{
-  margin-top:20px;
+.choose_btn_wrapper {
+  position: relative;
+}
+.guide {
+  margin-top: 20px;
   font-size: 15px;
-  text-align: center
+  text-align: center;
 }
 </style>
 

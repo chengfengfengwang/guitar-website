@@ -8,6 +8,7 @@ import JitapuDetail from './views/JitapuDetail.vue'
 import Me from './views/Me.vue'
 import Metronume from './views/Metronume.vue'
 import UseGuide from './views/UseGuide.vue'
+import LocalFulScreen from './views/LocalFulScreen.vue'
 
 Vue.use(Router);
 const router = new Router({
@@ -23,6 +24,11 @@ const router = new Router({
           path: '/',
           name: 'home',
           component: Home
+        },
+        {
+          path: '/LocalFulScreen',
+          name: 'LocalFulScreen',
+          component: LocalFulScreen
         },
         {
           path: '/UseGuide',
