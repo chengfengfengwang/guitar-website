@@ -24,7 +24,7 @@
           <p class="qr_block_title">微信公众号</p>
           <img
             class="wx_qr"
-            src="https://static.jitashe.org/template/jitashe/image/tab/weixin_qrcode.png?x-oss-process=image/format,webp"
+            src="../assets/img/common/wechat_qr.jpg"
             alt
           >
         </div>
