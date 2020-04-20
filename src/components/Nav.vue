@@ -17,9 +17,17 @@
       <el-menu-item index="/message">反馈</el-menu-item>
       <!-- <el-menu-item index="/" disabled>
         <img class="wechat" src="../assets/img/common/wechat1.png" alt>
-      </el-menu-item> -->
-      <div class="nav_items">
-        <img class="wechat" src="../assets/img/common/wechat.png" alt="">
+      </el-menu-item>-->
+      <div class="nav_items" @mouseenter="wxQrShow=true" @mouseleave="wxQrShow=false">
+        <img class="wechat" src="../assets/img/common/wechat.png" alt>
+        <div v-show="wxQrShow" class="qr_block">
+          <p class="qr_block_title">微信公众号</p>
+          <img
+            class="wx_qr"
+            src="https://static.jitashe.org/template/jitashe/image/tab/weixin_qrcode.png?x-oss-process=image/format,webp"
+            alt
+          >
+        </div>
       </div>
     </el-menu>
     <!-- <div class="user">
@@ -34,7 +42,8 @@ export default {
     return {
       activeIndex: "3",
       activeIndex2: "2",
-      defaultActive: "/me"
+      defaultActive: "/me",
+      wxQrShow: false
     };
   },
   methods: {
@@ -59,10 +68,35 @@ export default {
   right: 20px;
   top: 20px;
 }
-.nav_items{
+.nav_items {
+  position: relative;
+  float: left;
+  height: 3.75rem;
+  margin-left: 10px;
+  img.wechat {
+    width: 30px;
+    line-height: 4.75rem;
+    margin-top: 15px;
+  }
+  .qr_block {
+    padding: 10px 15px;
+    position: absolute;
+    z-index: 9;
+    bottom: -185px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
 
-}
-img.wechat {
-  width: 30px;
+    .qr_block_title {
+      margin-bottom: 7px;
+      //margin-top: 15px;
+      font-size: 13px;
+    }
+    img.wx_qr {
+      width: 140px;
+    }
+  }
 }
 </style>
