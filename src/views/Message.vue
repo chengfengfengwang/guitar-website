@@ -9,16 +9,23 @@
       maxlength="100"
       show-word-limit
     ></el-input>
-      <el-button style="margin-top:10px" type="primary">提交</el-button>
-
+    <el-button @click="handleSubmit" style="margin-top:10px" type="primary">提交</el-button>
   </div>
 </template>
 <script>
+let baseUrl = "http://139.155.158.160";
 export default {
   data() {
     return {
       message: ""
     };
+  },
+  methods: {
+    handleSubmit() {
+      this.axios.post(`${baseUrl}/msg`, {
+        msg: this.message
+      });
+    }
   }
 };
 </script>
