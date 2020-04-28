@@ -15,6 +15,7 @@
       <el-menu-item index="/jtpdetail">吉他谱详情</el-menu-item>
       <el-menu-item index="/me">我的</el-menu-item>-->
       <el-menu-item index="/message">反馈</el-menu-item>
+      <el-menu-item index="/reward">打赏</el-menu-item>
       <!-- <el-menu-item index="/" disabled>
         <img class="wechat" src="../assets/img/common/wechat1.png" alt>
       </el-menu-item>-->

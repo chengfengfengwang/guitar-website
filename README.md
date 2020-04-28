@@ -9,5 +9,3 @@ https://chengfengfengwang.github.io/my-guitar-tool/
 网址全屏校验
 知乎翻页问答那里做推广
 赞助
-反馈提交
-上传到服务器

@@ -9,6 +9,7 @@ import Me from './views/Me.vue'
 import Metronume from './views/Metronume.vue'
 import UseGuide from './views/UseGuide.vue'
 import LocalFulScreen from './views/LocalFulScreen.vue'
+import Reward from './views/Reward.vue'
 
 Vue.use(Router);
 const router = new Router({
@@ -44,11 +45,16 @@ const router = new Router({
           path: '/jtpdetail',
           name: 'JitapuDetail',
           component: JitapuDetail
+        }, 
+        {
+          path: '/Reward',
+          name: 'Reward',
+          component: Reward
         },
         {
-          path: '/me',
-          name: 'Me',
-          component: Me
+          path: '/message',
+          name: 'Message',
+          component: () => import(/* webpackChunkName: "about" */ './views/Message.vue')
         },
         {
           path: '/message',
@@ -59,7 +65,7 @@ const router = new Router({
           path: '/metronume',
           name: 'Metronume',
           component: Metronume
-        },
+        }, 
       ]
     },
     {
