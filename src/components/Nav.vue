@@ -30,6 +30,17 @@
           >
         </div>
       </div>
+      <!-- <div class="nav_items" @mouseenter="wxGroupShow=true" @mouseleave="wxGroupShow=false">
+        <img class="wechat" src="../assets/img/common/group.png" alt>
+        <div v-show="wxGroupShow" class="qr_block wx_group">
+          <p class="qr_block_title">扫描二维码回复<span class="group_key">xxx</span>入群</p>
+          <img
+            class="wx_qr"
+            src="../assets/img/common/wechat_qr.jpg"
+            alt
+          >
+        </div>
+      </div> -->
     </el-menu>
     <!-- <div class="user">
       {{$store.getters.username}}
@@ -44,7 +55,8 @@ export default {
       activeIndex: "3",
       activeIndex2: "2",
       defaultActive: "/me",
-      wxQrShow: false
+      wxQrShow: false,
+      wxGroupShow:false
     };
   },
   methods: {
@@ -99,5 +111,12 @@ export default {
       width: 140px;
     }
   }
+  .qr_block.wx_group{
+    bottom: -205px;
+    padding: 20px 40px;
+  }
+}
+.group_key{
+  font-weight: 700
 }
 </style>

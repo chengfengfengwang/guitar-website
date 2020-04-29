@@ -3,7 +3,7 @@
     <div style="margin-bottom:10px">你想要说什么：</div>
     <el-input
       type="textarea"
-      placeholder="请输入内容"
+      placeholder="随便说点什么/或者给我提点建议吧"
       rows="7"
       v-model="message"
       maxlength="100"
