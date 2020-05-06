@@ -20,11 +20,19 @@ export default {
       message: ""
     };
   },
+  mounted() {},
   methods: {
     handleSubmit() {
-      this.axios.post(`${baseUrl}/msg`, {
-        msg: this.message
-      });
+      this.axios
+        .post(`${baseUrl}/msg`, {
+          msg: this.message
+        })
+        .then(res => {
+          this.$message({
+            message: "感谢您的反馈！",
+            type: "success"
+          });
+        });
     }
   }
 };

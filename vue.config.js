@@ -1,5 +1,8 @@
 const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
+const PrerenderSPAPlugin = require('prerender-spa-plugin');
+const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
+const path = require('path');
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
         ? '/my-guitar-tool/'
@@ -37,5 +40,22 @@ module.exports = {
                     }
                 })
             );
-    }
+    },
+    // configureWebpack: {
+    //     plugins: [
+    //         new PrerenderSPAPlugin({
+    //             staticDir: path.join(__dirname, 'dist'),
+    //             routes: ['/login'],
+    //             renderer: new Renderer({
+    //                 inject: {
+    //                     foo: 'bar'
+    //                 },
+    //                 headless: false,
+    //                 renderAfterDocumentEvent: 'render-event',
+    //                 //renderAfterTime: 5000,
+    //                 //renderAfterElementExists: 'my-app-element'
+    //             }),
+    //         })
+    //     ]
+    // }
 }

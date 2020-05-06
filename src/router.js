@@ -10,6 +10,7 @@ import Metronume from './views/Metronume.vue'
 import UseGuide from './views/UseGuide.vue'
 import LocalFulScreen from './views/LocalFulScreen.vue'
 import Reward from './views/Reward.vue'
+import Login from './views/Login.vue'
 
 Vue.use(Router);
 const router = new Router({
@@ -71,7 +72,7 @@ const router = new Router({
     {
       path: '/login',
       name: 'Login',
-      component: () => import(/* webpackChunkName: "about" */ './views/Login.vue')
+      component: Login
     },
     {
       path: '/register',
