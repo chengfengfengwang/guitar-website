@@ -3,6 +3,9 @@ const pxtorem = require('postcss-pxtorem');
 const PrerenderSPAPlugin = require('prerender-spa-plugin');
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
 const path = require('path');
+function resolve(dir) {
+    return path.join(__dirname, dir)
+}
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
         ? '/my-guitar-tool/'
@@ -24,38 +27,7 @@ module.exports = {
         }
     },
     chainWebpack: config => {
-        // const imgRule = config.module.rule('images');
-        // if (process.env.NODE_ENV === 'production') {
-        //     imgRule.use('image-webpack-loader')
-        //         .loader('image-webpack-loader');
-        // }
-        config.module
-            .rule("vue")
-            .use("vue-loader")
-            .loader("vue-loader")
-            .tap(options =>
-                Object.assign(options, {
-                    transformAssetUrls: {
-                        audio: "src"
-                    }
-                })
-            );
-    },
-    // configureWebpack: {
-    //     plugins: [
-    //         new PrerenderSPAPlugin({
-    //             staticDir: path.join(__dirname, 'dist'),
-    //             routes: ['/login'],
-    //             renderer: new Renderer({
-    //                 inject: {
-    //                     foo: 'bar'
-    //                 },
-    //                 headless: false,
-    //                 renderAfterDocumentEvent: 'render-event',
-    //                 //renderAfterTime: 5000,
-    //                 //renderAfterElementExists: 'my-app-element'
-    //             }),
-    //         })
-    //     ]
-    // }
+        config.resolve.alias
+            .set('components', resolve('src/components'))
+    }
 }
