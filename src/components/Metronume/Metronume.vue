@@ -12,9 +12,9 @@
         </div>
       </div>
       <div class="line2">
-        <img class="reduce" src="../../assets/img/common/reduce.svg" @click="speed--" alt>
+        <img class="reduce" src="../../assets/img/common/reduce.svg" @click="reduce" alt>
         <el-slider @change="mouseChange" :min="40" :max="240" class="slider" v-model="speed"></el-slider>
-        <img class="add" src="../../assets/img/common/add.svg" @click="speed++" alt>
+        <img class="add" src="../../assets/img/common/add.svg" @click="add" alt>
       </div>
     </div>
   </div>
@@ -25,7 +25,8 @@ export default {
   data() {
     return {
       speed: 70,
-      isPlaying: false
+      isPlaying: false,
+      clicked: false
     };
   },
   mounted() {
@@ -36,6 +37,7 @@ export default {
     start() {
       this.isPlaying = true;
       this.metronume.start();
+      this.clicked = false;
     },
     stop() {
       this.isPlaying = false;
@@ -43,14 +45,23 @@ export default {
     },
     reduce() {
       this.speed--;
-      this.speedChange();
+      if (this.clicked) return;
+      this.clicked = true;
+      let timeID = setTimeout(() => {
+        this.speedChange();
+      }, 800);
     },
     add() {
       this.speed++;
-      this.speedChange();
+      if (this.clicked) return;
+      this.clicked = true;
+      let timeID = setTimeout(() => {
+        this.speedChange();
+      }, 800);
     },
     speedChange() {
       if (this.isPlaying) {
+          console.log('zzz')
         this.stop();
         this.metronume = new Metronume(this.speed);
         this.start();
@@ -69,7 +80,7 @@ export default {
 .m_wrapper {
   margin: 30px auto 50px auto;
   .line1 {
-      margin-bottom: 20px;
+    margin-bottom: 20px;
     padding: 0 22px 0 6px;
     display: flex;
     justify-content: space-between;
