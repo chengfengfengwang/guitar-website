@@ -10,7 +10,7 @@
       active-text-color="#ffd04b"
       router
     >
-      <el-menu-item index="/">首页</el-menu-item>
+      <el-menu-item index="/">谱工具</el-menu-item>
       <!-- <el-menu-item index="/jitapu">吉他谱</el-menu-item>
       <el-menu-item index="/jtpdetail">吉他谱详情</el-menu-item>
       <el-menu-item index="/me">我的</el-menu-item>-->
