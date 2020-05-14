@@ -8,7 +8,7 @@ function resolve(dir) {
 }
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
-        ? '/my-guitar-tool/'
+        ? './'
         : '/',
     devServer: {
         port: 5588,     // 端口

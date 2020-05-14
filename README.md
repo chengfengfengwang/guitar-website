@@ -10,6 +10,7 @@ https://chengfengfengwang.github.io/my-guitar-tool/
 微信登录
 节拍器
 
+刷新/history模式
 知乎翻页问答那里做推广
 买域名
 服务端渲染 seo?
