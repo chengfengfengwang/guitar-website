@@ -1,7 +1,5 @@
 const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
-const PrerenderSPAPlugin = require('prerender-spa-plugin');
-const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
 const path = require('path');
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -29,5 +27,7 @@ module.exports = {
     chainWebpack: config => {
         config.resolve.alias
             .set('components', resolve('src/components'))
+            .set('util', resolve('src/assets/util.js'))
+            .set('assets', resolve('src/assets'))
     }
 }

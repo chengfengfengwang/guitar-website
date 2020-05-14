@@ -10,7 +10,7 @@
         <router-link style="margin-right:10px" to="/LocalFulScreen">已有下载好的曲谱？</router-link>
         <router-link to="/Useguide">不知道怎么使用？</router-link>
       </div>
-      
+
       <!-- <el-button class="fullscreen_btn collect_btn" type="success" round @click="collectFormShow=true">收藏</el-button> -->
       <!-- <h1>本地图片全屏</h1>
       <div @drop="handleDrop" id="uploadBox" class="upload_box">
@@ -34,7 +34,7 @@
       <div>
         <el-button class="clear_btn" round @click="clearSelect" type="warning">清空当前选择</el-button>
         <el-button class="fullscreen_btn" type="primary" round @click="toFullScreen">全屏</el-button>
-      </div> -->
+      </div>-->
       <!-- 全屏元素 -->
       <div v-show="fullscreenShow" ref="fullscreenWrapper" class="fullscreen_display_wrapper">
         <div
@@ -45,7 +45,7 @@
           <img :src="preview" alt>
         </div>
       </div>
-      
+
       <!-- 收藏对话框 -->
       <el-dialog title="我的收藏" :visible.sync="collectFormShow">
         <el-form :model="collectForm">
@@ -57,7 +57,7 @@
               <el-option label="区域一" value="shanghai"></el-option>
               <el-option label="区域二" value="beijing"></el-option>
             </el-select>
-          </el-form-item> -->
+          </el-form-item>-->
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="collectFormShow = false">取 消</el-button>
@@ -79,8 +79,8 @@ export default {
         // "http://data.17jita.com/attachment/portal/201907/21/151525jv11u21uwpcpcb1m.png",
         // "http://data.17jita.com/attachment/portal/201907/21/151526eoc4iuhzcetitdpt.png",
       ],
-      collectForm:{},
-      collectFormShow:false
+      collectForm: {},
+      collectFormShow: false
     };
   },
   components: {
@@ -103,19 +103,29 @@ export default {
         //退出全屏
       }
     });
+    
+    // this.$alert('这是一段内容', '标题名称', {
+    //   confirmButtonText: '确定',
+    //   callback: action => {
+    //     this.$message({
+    //       type: 'info',
+    //       message: `action: ${ action }`
+    //     });
+    //   }
+    // });
   },
   methods: {
-    submitCollection(){
-      this.collectForm.imgs=this.$refs.inputImg.imgArr.map(e => {
+    submitCollection() {
+      this.collectForm.imgs = this.$refs.inputImg.imgArr.map(e => {
         return e.src;
       });
-      var collectionList = JSON.parse(localStorage.getItem('collectionList'));
-      collectionList = collectionList?collectionList:[];
-      collectionList.push(this.collectForm)
-      localStorage.setItem('collectionList',JSON.stringify(collectionList))
+      var collectionList = JSON.parse(localStorage.getItem("collectionList"));
+      collectionList = collectionList ? collectionList : [];
+      collectionList.push(this.collectForm);
+      localStorage.setItem("collectionList", JSON.stringify(collectionList));
       this.collectFormShow = false;
     },
-    
+
     collect() {},
     inputFullScreen() {
       var imgArr = this.$refs.inputImg.imgArr;
@@ -246,10 +256,10 @@ export default {
     width: auto;
   }
 }
-.guide{
-  margin-top:20px;
+.guide {
+  margin-top: 20px;
   font-size: 15px;
-  text-align: center
+  text-align: center;
 }
 </style>
 
