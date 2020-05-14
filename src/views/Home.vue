@@ -5,7 +5,7 @@
       <div class="input_area">
         <InputGuitarImg ref="inputImg"/>
       </div>
-      <el-button class="fullscreen_btn" type="primary" round @click="inputFullScreen">确定</el-button>
+      <el-button class="fullscreen_btn" type="primary" round @click="inputFullScreen">全屏</el-button>
       <div class="guide">
         <router-link style="margin-right:10px" to="/LocalFulScreen">已有下载好的曲谱？</router-link>
         <router-link to="/Useguide">不知道怎么使用？</router-link>
