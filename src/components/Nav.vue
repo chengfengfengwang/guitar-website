@@ -8,15 +8,24 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
-      router
+      :router="true"
     >
-      <el-menu-item index="/">谱工具</el-menu-item>
       <!-- <el-menu-item index="/jitapu">吉他谱</el-menu-item>
       <el-menu-item index="/jtpdetail">吉他谱详情</el-menu-item>
       <el-menu-item index="/me">我的</el-menu-item>-->
-      <el-menu-item index="/Metronume">节拍器</el-menu-item>
-      <el-menu-item index="/message">反馈</el-menu-item>
-      <el-menu-item index="/reward">打赏</el-menu-item>
+      <a class="a_link" href="/#/">
+        <el-menu-item index="/">谱工具</el-menu-item>
+      </a>
+      <a class="a_link" href="/#/Metronume">
+        <el-menu-item @select="test" index="/Metronume">节拍器</el-menu-item>
+      </a>
+      <a class="a_link" href="/#/message">
+        <el-menu-item index="/message">反馈</el-menu-item>
+      </a>
+      <a class="a_link" href="/#/reward">
+        <el-menu-item index="/reward">打赏</el-menu-item>
+      </a>
+
       <!-- <el-menu-item index="/" disabled>
         <img class="wechat" src="../assets/img/common/wechat1.png" alt>
       </el-menu-item>-->
@@ -24,11 +33,7 @@
         <img class="wechat" src="../assets/img/common/wechat.png" alt>
         <div v-show="wxQrShow" class="qr_block">
           <p class="qr_block_title">微信公众号</p>
-          <img
-            class="wx_qr"
-            src="../assets/img/common/wechat_qr.jpg"
-            alt
-          >
+          <img class="wx_qr" src="../assets/img/common/wechat_qr.jpg" alt>
         </div>
       </div>
       <!-- <div class="nav_items" @mouseenter="wxGroupShow=true" @mouseleave="wxGroupShow=false">
@@ -41,7 +46,7 @@
             alt
           >
         </div>
-      </div> -->
+      </div>-->
     </el-menu>
     <!-- <div class="user">
       {{$store.getters.username}}
@@ -57,10 +62,13 @@ export default {
       activeIndex2: "2",
       defaultActive: "/me",
       wxQrShow: false,
-      wxGroupShow:false
+      wxGroupShow: false
     };
   },
   methods: {
+    test() {
+      console.log("test...");
+    },
     logout() {
       localStorage.clear();
       this.$router.push("/login");
@@ -112,12 +120,15 @@ export default {
       width: 140px;
     }
   }
-  .qr_block.wx_group{
+  .qr_block.wx_group {
     bottom: -205px;
     padding: 20px 40px;
   }
 }
-.group_key{
-  font-weight: 700
+.group_key {
+  font-weight: 700;
+}
+.a_link {
+  float: left;
 }
 </style>

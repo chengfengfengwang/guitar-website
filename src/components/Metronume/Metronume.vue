@@ -73,6 +73,12 @@ export default {
       this.speedChange();
     }
   },
+  beforeDestroy(){
+    if(this.isPlaying){
+      this.stop()
+    }
+    
+  },
   watch: {}
 };
 </script>

@@ -8,7 +8,6 @@ https://chengfengfengwang.github.io/my-guitar-tool/
 笔记本测试一下，是否使用滚动:3页勉强看清
 网址全屏校验
 微信登录
-节拍器
 
 移动端？节拍器移动端
 刷新/history模式
@@ -20,4 +19,12 @@ https://chengfengfengwang.github.io/my-guitar-tool/
 购买收费
 悬赏求谱
 
+登录发谱、入驻？
+曲谱、弹唱？本月曲谱点击排行？本月弹唱点赞排行？
 字体美化？
+谱子下面的网友视频
+录制成功或者上传成功分享
+求谱投票，邀请助力
+有谱吗app
+社区说说，上传作品同步到社区
+签到领币
