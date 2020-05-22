@@ -8,9 +8,17 @@ router.get('/user', async (ctx, next) => {
 });
 router.post('/register', async (ctx, next) => {
     let body = ctx.request.body;
-    console.log(body);
-    console.log('register---')
-    user.create(body)
+    let findUser = user.findOne({
+        where:{
+            account:body.account
+        }
+    })
+    if(findUser){
+        throw new Error('用户已存在')
+    }else{
+        user.create(body)
+    }
+    
     ctx.response.body = { error: 0, msg: 'test111' };
 });
 module.exports = router;

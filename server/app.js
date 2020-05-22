@@ -3,7 +3,10 @@ const bodyParser = require('koa-bodyparser');
 const requireDirectory = require('require-directory')
 const cors = require('koa-cors');
 const app = new Koa();
+const catchError = require('./middleware/exception');
 
+//全局异常处理
+app.use(catchError);
 app.use(cors());
 app.use(bodyParser());
 
