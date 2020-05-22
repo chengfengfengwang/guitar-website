@@ -4,6 +4,9 @@ const requireDirectory = require('require-directory')
 const cors = require('koa-cors');
 const app = new Koa();
 
+app.use(cors());
+app.use(bodyParser());
+
 //自动加载路由
 requireDirectory(module,'./api', {visit: function(e){
     app.use(e.routes());

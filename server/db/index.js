@@ -1,8 +1,9 @@
 
 const Sequelize = require('sequelize');
-const config = require(__dirname + '/config.js');
+const config = require('./../config');
 const sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
     dialect: 'mysql'
 });
+sequelize.sync()
 module.exports = sequelize;
