@@ -23,7 +23,7 @@
       </div>
       <div>
         <div class="choose_btn_wrapper" @click="clearSelect">
-          <el-button class="clear_btn" round  type="warning">{{previewList.length!=0?'重新选择':'选择图片'}}</el-button>
+          <el-button class="clear_btn" round type="warning">{{previewList.length!=0?'重新选择':'选择图片'}}</el-button>
           <input
             class="choose_input"
             @change="changeFile"
@@ -37,9 +37,9 @@
 
         <el-button class="fullscreen_btn" type="primary" round @click="toFullScreen">全屏</el-button>
         <div class="guide">
-        <router-link style="margin-right:10px" to="/">使用线上图片？</router-link>
-        <router-link to="/Useguide">不知道怎么使用？</router-link>
-      </div>
+          <router-link style="margin-right:10px" to="/">使用线上图片？</router-link>
+          <router-link to="/Useguide">不知道怎么使用？</router-link>
+        </div>
       </div>
       <!-- 全屏元素 -->
       <div v-show="fullscreenShow" ref="fullscreenWrapper" class="fullscreen_display_wrapper">
@@ -126,7 +126,14 @@ export default {
       this.previewList = [];
     },
     toFullScreen() {
-      this.fullscreenWrapper.requestFullscreen();
+      if (this.previewList && this.previewList.length>0) {
+        this.fullscreenWrapper.requestFullscreen();
+      } else {
+        this.$message({
+          message: "请先选择文件",
+          type: "warning"
+        });
+      }
     },
     changeFile(e) {
       var fileList = e.target.files;

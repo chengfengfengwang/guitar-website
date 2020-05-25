@@ -80,7 +80,7 @@ export default {
         // "http://data.17jita.com/attachment/portal/201907/21/151526eoc4iuhzcetitdpt.png",
       ],
       collectForm: {},
-      collectFormShow: false
+      collectFormShow: true
     };
   },
   components: {
@@ -132,7 +132,17 @@ export default {
       this.previewList = imgArr.map(e => {
         return e.src;
       });
-      this.toFullScreen();
+      if(this.previewList.every((e)=>{
+        return (e+'').length>0
+      })){
+        this.toFullScreen();
+      }else{
+        this.$message({
+          message: '请检查输入内容',
+          type: 'warning'
+        });
+      }
+      
     },
     clearSelect() {
       this.previewList = [];

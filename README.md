@@ -12,6 +12,10 @@ https://chengfengfengwang.github.io/my-guitar-tool/
 移动端？节拍器移动端
 刷新/history模式
 
+全屏校验
+使用收藏
+
+
 知乎翻页问答那里做推广
 服务端渲染 seo?
 收费谱？
