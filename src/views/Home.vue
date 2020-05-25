@@ -38,32 +38,26 @@
       <!-- 全屏元素 -->
       <div v-show="fullscreenShow" ref="fullscreenWrapper" class="fullscreen_display_wrapper">
         <div
-          :class="previewList.length===1?'contain_one':''"
+          :class="[previewList.length===1?'contain_one':'','full_item']"
           v-for="(preview,index) in previewList"
           :key="index"
         >
           <img :src="preview" alt>
         </div>
+        <div class="collect_btn" @click="collectFormShow=true">收藏</div>
+        <!-- 收藏对话框 -->
+        <el-dialog title="我的收藏" :visible.sync="collectFormShow">
+          <el-form :model="collectForm">
+            <el-form-item label="名称" label-width="300">
+              <el-input v-model="collectForm.name" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="collectFormShow = false">取 消</el-button>
+            <el-button type="primary" @click="submitCollection">确 定</el-button>
+          </div>
+        </el-dialog>
       </div>
-
-      <!-- 收藏对话框 -->
-      <el-dialog title="我的收藏" :visible.sync="collectFormShow">
-        <el-form :model="collectForm">
-          <el-form-item label="名称" label-width="300">
-            <el-input v-model="collectForm.name" autocomplete="off"></el-input>
-          </el-form-item>
-          <!-- <el-form-item label="活动区域" label-width="300">
-            <el-select v-model="collectForm.region" placeholder="请选择活动区域">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
-            </el-select>
-          </el-form-item>-->
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="collectFormShow = false">取 消</el-button>
-          <el-button type="primary" @click="submitCollection">确 定</el-button>
-        </div>
-      </el-dialog>
     </div>
   </div>
 </template>
@@ -75,24 +69,18 @@ export default {
       imgSrc: "",
       fullscreenShow: false,
       previewList: [
-        // "http://data.17jita.com/attachment/portal/201907/21/151525v69wyqt2xgjrjlzk.png",
+        //"http://data.17jita.com/attachment/portal/201907/21/151525v69wyqt2xgjrjlzk.png"
         // "http://data.17jita.com/attachment/portal/201907/21/151525jv11u21uwpcpcb1m.png",
         // "http://data.17jita.com/attachment/portal/201907/21/151526eoc4iuhzcetitdpt.png",
       ],
       collectForm: {},
-      collectFormShow: true
+      collectFormShow: false
     };
   },
   components: {
     InputGuitarImg
   },
   mounted() {
-    // document.querySelector("#myFile").addEventListener("dragover", e => {
-    //   e.preventDefault();
-    // });
-    // document.querySelector("#myFile").addEventListener("drop", e => {
-    //   e.preventDefault();
-    // });
     this.fullscreenWrapper = this.$refs.fullscreenWrapper;
     this.fullscreenWrapper.addEventListener("fullscreenchange", e => {
       if (document.fullscreenElement) {
@@ -103,16 +91,6 @@ export default {
         //退出全屏
       }
     });
-    
-    // this.$alert('这是一段内容', '标题名称', {
-    //   confirmButtonText: '确定',
-    //   callback: action => {
-    //     this.$message({
-    //       type: 'info',
-    //       message: `action: ${ action }`
-    //     });
-    //   }
-    // });
   },
   methods: {
     submitCollection() {
@@ -132,17 +110,18 @@ export default {
       this.previewList = imgArr.map(e => {
         return e.src;
       });
-      if(this.previewList.every((e)=>{
-        return (e+'').length>0
-      })){
+      if (
+        this.previewList.every(e => {
+          return (e + "").length > 0;
+        })
+      ) {
         this.toFullScreen();
-      }else{
+      } else {
         this.$message({
-          message: '请检查输入内容',
-          type: 'warning'
+          message: "请检查输入内容",
+          type: "warning"
         });
       }
-      
     },
     clearSelect() {
       this.previewList = [];
@@ -245,7 +224,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  & > div {
+  .full_item {
     //height: 100vh;
     width: 10px;
     //等分剩余空间
@@ -253,7 +232,7 @@ export default {
     display: flex;
     align-items: center;
   }
-  & > div > img {
+  .full_item img {
     width: 100%;
     // 防止图片高度溢出
     max-height: 100vh;
@@ -264,6 +243,14 @@ export default {
   }
   .contain_one > img {
     width: auto;
+  }
+  .collect_btn {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    padding: 10px;
+    transform: translateY(-50%);
+    background-color: #fff;
   }
 }
 .guide {
