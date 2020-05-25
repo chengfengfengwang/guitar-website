@@ -1,5 +1,6 @@
 const router = require('koa-router')();
-const user = require( './../modules/users.js');
+const {HttpException} = require('./../lib/exception');
+const user = require( '../modules/user.js');
 
 router.get('/user', async (ctx, next) => {
     console.log('user---')
@@ -8,18 +9,18 @@ router.get('/user', async (ctx, next) => {
 });
 router.post('/register', async (ctx, next) => {
     let body = ctx.request.body;
-    let findUser = user.findOne({
+    let findUser = await user.findOne({
         where:{
             account:body.account
         }
     })
     if(findUser){
-        throw new Error('用户已存在')
+        throw new HttpException('用户已存在')
     }else{
-        user.create(body)
+        await user.create(body)
     }
     
-    ctx.response.body = { error: 0, msg: 'test111' };
+    ctx.response.body = { error: 0, msg: '创建成功' };
 });
 module.exports = router;
 //相当于return module.exports

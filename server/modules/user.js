@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = require('./../db/index');
+const sequelize = require('../db/index');
 const Model = Sequelize.Model;
 class User extends Model {}
 User.init({
