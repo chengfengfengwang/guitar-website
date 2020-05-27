@@ -1,12 +1,14 @@
 const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
 const path = require('path');
+const uploadConfig = require('./uploadConfig');
+
 function resolve(dir) {
     return path.join(__dirname, dir)
 }
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
-        ? './'
+        ? `${uploadConfig.assectsUrl}/${uploadConfig.assetsPrefix}`
         : '/',
     devServer: {
         port: 5588,     // 端口

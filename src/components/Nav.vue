@@ -19,23 +19,23 @@
       <a class="a_link" href="/#/Metronume">
         <el-menu-item @select="test" index="/Metronume">节拍器</el-menu-item>
       </a>
-      <a class="a_link" href="/#/message">
+       <a class="a_link" href="/#/message">
         <el-menu-item index="/message">反馈</el-menu-item>
       </a>
-      <a class="a_link" href="/#/reward">
+      <!-- <a class="a_link" href="/#/reward">
         <el-menu-item index="/reward">打赏</el-menu-item>
-      </a>
+      </a> -->
 
       <!-- <el-menu-item index="/" disabled>
         <img class="wechat" src="../assets/img/common/wechat1.png" alt>
       </el-menu-item>-->
-      <div class="nav_items" @mouseenter="wxQrShow=true" @mouseleave="wxQrShow=false">
+      <!-- <div class="nav_items" @mouseenter="wxQrShow=true" @mouseleave="wxQrShow=false">
         <img class="wechat" src="../assets/img/common/wechat.png" alt>
         <div v-show="wxQrShow" class="qr_block">
           <p class="qr_block_title">微信公众号</p>
           <img class="wx_qr" src="../assets/img/common/wechat_qr.jpg" alt>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="nav_items" @mouseenter="wxGroupShow=true" @mouseleave="wxGroupShow=false">
         <img class="wechat" src="../assets/img/common/group.png" alt>
         <div v-show="wxGroupShow" class="qr_block wx_group">

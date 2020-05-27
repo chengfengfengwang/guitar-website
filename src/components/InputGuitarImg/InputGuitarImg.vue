@@ -14,7 +14,7 @@ export default {
     return {
       imgArr: [
         {
-          src: "http://data.17jita.com/attachment/portal/201907/21/151525v69wyqt2xgjrjlzk.png"
+          src: ""
         },
         
         // {

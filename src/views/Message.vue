@@ -29,7 +29,7 @@ export default {
         })
         .then(res => {
           this.$message({
-            message: "感谢您的反馈！",
+            message: "已收到，感谢你的反馈！",
             type: "success"
           });
         });
