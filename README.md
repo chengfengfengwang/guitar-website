@@ -6,14 +6,12 @@ https://chengfengfengwang.github.io/my-guitar-tool/
 
 全屏那里缓存起来
 笔记本测试一下，是否使用滚动:3页勉强看清
-网址全屏校验
 微信登录
 
-移动端？节拍器移动端
-刷新/history模式
 
-全屏校验
+
 使用收藏
+最终的效果预览
 
 富文本
 上传图片大小限制

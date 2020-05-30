@@ -10,7 +10,7 @@ import Metronume from './views/Metronume.vue'
 import UseGuide from './views/UseGuide.vue'
 import LocalFulScreen from './views/LocalFulScreen.vue'
 import Reward from './views/Reward.vue'
-//import Publish from './views/Publish.vue'
+import Publish from './views/Publish.vue'
 import Login from './views/Login.vue'
 
 Vue.use(Router);
@@ -68,11 +68,11 @@ const router = new Router({
           name: 'Metronume',
           component: Metronume
         }, 
-        // {
-        //   path: '/publish',
-        //   name: 'publish',
-        //   component: () => import(/* webpackChunkName: "about" */ './views/Publish.vue')
-        // }
+        {
+          path: '/publish',
+          name: 'publish',
+          component: () => import(/* webpackChunkName: "about" */ './views/Publish.vue')
+        }
       ]
     },
     {

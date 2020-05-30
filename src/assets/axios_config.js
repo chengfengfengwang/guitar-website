@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from './../../src/store';
-axios.defaults.headers.common['user_id'] = store.getters.user_id;
+//axios.defaults.headers.common['user_id'] = store.getters.user_id;
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
