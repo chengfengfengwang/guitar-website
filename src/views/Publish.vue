@@ -43,8 +43,6 @@ export default {
 
         // 此处为图片上传处理函数
         images_upload_handler: (blobInfo, success, failure) => {
-          console.log(blobInfo )
-          console.log(blobInfo.blob())
           let formData = new FormData();
           formData.append('material', blobInfo.blob());
           this.axios.post('http://58.87.125.111:55555/v1/upload_material/',formData,{
@@ -57,7 +55,7 @@ export default {
             failure(err);
           })
         },
-        statusbar: true, // 底部的状态栏
+        statusbar: false, // 底部的状态栏
         menubar: true, // 最上方的菜单
         branding: false // 水印“Powered by TinyMCE”
       }
