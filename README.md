@@ -32,3 +32,4 @@ https://chengfengfengwang.github.io/my-guitar-tool/
 有谱吗app
 社区说说，上传作品同步到社区
 签到领币
+求谱 众筹求谱
